@@ -1,0 +1,5 @@
+.banner-bg {
+    background-image: url(../../assets/images/index-overlay.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+}

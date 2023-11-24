@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import RegisterMenu from './MenuItems/RegisterMenue';
+import LoginBtn from './MenuItems/LoginBtn';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -13,27 +15,31 @@ const Navbar = () => {
         { id: 1, title: 'Home', link: '/' },
         { id: 2, title: 'About', link: '/about' },
         { id: 3, title: 'Contact', link: '/contact' },
+
         // Add or remove menu items as needed
     ];
 
     return (
-        <nav className="bg-tertiary py-2">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className="bg-tertiary py-4 shadow-md">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-0">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
                     <div className="flex-shrink-0">
-                        <Link to="/" className="text-white text-lg font-bold font-merinda lg:text-4xl">
+                        <Link to="/" className="text-white text-2xl font-bold font-merinda lg:text-4xl">
                             Prizo
                         </Link>
                     </div>
 
                     {/* Menu Items for LG devices */}
-                    <div className="hidden md:flex md:space-x-4">
+                    <div className="hidden md:flex md:space-x-4 items-center">
                         {menuItems.map(item => (
                             <Link key={item.id} to={item.link} className="text-white hover:text-gray-300 font-medium">
                                 {item.title}
                             </Link>
                         ))}
+
+                        <RegisterMenu />
+                        <LoginBtn />
                     </div>
 
                     {/* Hamburger Menu (for smaller devices) */}
@@ -72,6 +78,14 @@ const Navbar = () => {
                             {item.title}
                         </Link>
                     ))}
+
+                    <RegisterMenu />
+
+                    <br />
+                    <hr className='' />
+                    <br />
+                    
+                    <LoginBtn />
                 </div>
             </div>
         </nav>
