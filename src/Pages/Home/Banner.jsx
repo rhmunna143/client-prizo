@@ -38,7 +38,7 @@ const Banner = () => {
 
                             <FaSearch className="text-2xl text-primary absolute top-[45px] left-4" />
 
-                            <button onClick={handleSearch} className="text-2xl font-medium bg-primary hover:bg-white text-secondary px-5 py-2 rounded-lg absolute right-3 lg:right-[135px] top-8">Find Now</button>
+                            <button onClick={handleSearch} className="text-lg font-medium bg-primary hover:bg-white text-secondary px-5 py-2 rounded-lg absolute right-3 lg:right-[135px] top-8 uppercase">Find Now</button>
                         </div>
 
                     </div>
