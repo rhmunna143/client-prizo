@@ -1,11 +1,12 @@
 import Container from "../../Components/Container";
 import PrimaryBtn from "../../Components/PrimaryBtn";
 import SectionHeading from "../../Components/SectionHeading";
-import img from "../../assets/images/about-us-img.png"
+import img from "../../assets/images/about-us-img.png";
+import Features from "./Features";
 
 const About = () => {
     return (
-        <div className="bg-tertiary pt-52 pb-96">
+        <div className="bg-tertiary pt-52">
             <Container>
                 <div className="flex flex-col gap-5 items-center md:flex-row">
                     <div className="img">
@@ -27,6 +28,10 @@ const About = () => {
                     </div>
                 </div>
             </Container>
+
+            <div className="safe">
+                <Features />
+            </div>
         </div>
     );
 };
