@@ -8,6 +8,12 @@ export default {
     extend: {
       fontFamily: {
         merinda: 'Merienda, cursive',
+      },
+
+      colors: {
+        primary: "#0ECDB9",
+        secondary: "#1F2340",
+        tertiary: "#1B1D4D",
       }
     },
   },
