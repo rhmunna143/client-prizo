@@ -5,6 +5,9 @@ import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import AllContests from "../Pages/AllContests/AllContests";
+import DetailsPage from "../Pages/Details/DetailsPage";
+import PaymentsPage from "../Pages/Payments/PaymentsPage";
 
 const router = createBrowserRouter([
     {
@@ -13,7 +16,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element:<Home></Home>
+                element: <Home></Home>
             },
 
             {
@@ -34,6 +37,21 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register></Register>
+            },
+
+            {
+                path: "/all",
+                element: <AllContests></AllContests>
+            },
+
+            {
+                path: "/details/:id",
+                element: <DetailsPage></DetailsPage>
+            },
+
+            {
+                path: "/pay",
+                element: <PaymentsPage></PaymentsPage>
             }
         ]
     }

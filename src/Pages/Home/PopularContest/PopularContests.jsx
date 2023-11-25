@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import Container from "../../../Components/Container";
+import PrimaryBtn from "../../../Components/PrimaryBtn";
 import SectionHeading from "../../../Components/SectionHeading";
 
 
@@ -21,7 +23,13 @@ const PopularContests = () => {
                     {/* add 6666 popular cards here.... */}
 
 
-
+                    <div className="btn w-fit mx-auto">
+                        <Link to={"/all"}>
+                            <PrimaryBtn
+                                text="See All Contest"
+                            />
+                        </Link>
+                    </div>
                 </div>
             </Container>
         </div>
