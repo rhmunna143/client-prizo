@@ -59,12 +59,12 @@ const DemoCarousel = () => {
 
     return (
         <>
-            <div ref={sliderRef} className="keen-slider">
-                <div className="keen-slider__slide number-slide1 ads-bg text-white py-[335px]">
+            <div data-aos="fade-right" ref={sliderRef} className="keen-slider">
+                <div data-aos="fade-left" className="keen-slider__slide number-slide1 ads-bg text-white py-[335px]">
 
                 </div>
 
-                <div className="keen-slider__slide number-slide2 slide winner-bg text-white py-[150px]">
+                <div data-aos="fade-left" className="keen-slider__slide number-slide2 slide winner-bg text-white py-[150px]">
 
                     <h2 className="text-4xl font-bold">Latest Winner</h2>
                     <div className="img w-64 h-64 rounded-full aspect-square bg-tertiary my-5">
@@ -75,7 +75,7 @@ const DemoCarousel = () => {
 
                 </div>
 
-                <div className="keen-slider__slide number-slide3 slide motivation-bg py-[165px] text-white">
+                <div data-aos="fade-left" className="keen-slider__slide number-slide3 slide motivation-bg py-[165px] text-white">
                     <h1 className="text-4xl uppercase font-bold my-6 text-center">Become a part of something extraordinary. <br /> Enter the contest!</h1>
                     <div className="rounded-md overflow-hidden shadow-lg bg-gradient-to-r from-blue-500 to-slate-600 p-6 text-white">
                         <h2 className="text-2xl font-bold mb-2">Join our Contest Today!</h2>

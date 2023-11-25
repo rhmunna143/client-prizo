@@ -67,7 +67,7 @@ const CreatorSlider = () => {
     )
 
     return (
-        <div className="wrapper">
+        <div data-aos="flip-left" className="wrapper">
             <div className="scene">
                 <div className="carousel keen-slider" ref={sliderRef}>
                     {/* {

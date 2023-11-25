@@ -26,7 +26,7 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="bg-tertiary py-4 shadow-md">
+        <nav data-aos="fade-down" className="bg-tertiary py-4 shadow-md">
             <div className="container mx-auto px-4 sm:px-6 lg:px-0">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
@@ -132,7 +132,7 @@ const Navbar = () => {
                             </div>
                             <ul className="dropdown-content z-[1] menu p-2 text-base shadow text-white rounded-lg bg-tertiary w-52">
                                 <li className='cursor-text'><p className="font-semibold text-base cursor-text">User Name</p></li>
-                                
+
                                 <li>
                                     <NavLink
                                         to="/dashboard"

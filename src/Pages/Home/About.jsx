@@ -9,11 +9,11 @@ const About = () => {
         <div className="bg-tertiary pt-52">
             <Container>
                 <div className="flex flex-col gap-5 items-center md:flex-row">
-                    <div className="img">
+                    <div data-aos="fade-right" className="img">
                         <img src={img} alt="" />
                     </div>
 
-                    <div className="text lg:w-3/5">
+                    <div data-aos="fade-left" className="text lg:w-3/5">
                         <SectionHeading
                             subHeading="Empowering Your Winning Journey"
                             heading="Dive into a World of Thrilling Challenges and Exclusive Rewards!"

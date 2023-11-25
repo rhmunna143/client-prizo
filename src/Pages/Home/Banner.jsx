@@ -38,10 +38,10 @@ const Banner = () => {
     };
 
     return (
-        <div className="banner-bg py-[200px]">
+        <div data-aos="fade-down" className="banner-bg py-[200px]">
             <Container>
                 <div className="flex flex-col-reverse md:flex-row items-center text-white">
-                    <div className="text space-y-3 lg:w-3/4">
+                    <div data-aos="fade-right" className="text space-y-3 lg:w-3/4">
                         <h4 className="text-3xl  font-semibold text-primary uppercase">Where Passion Meets Competition</h4>
                         <h2 className="text-6xl  font-bold uppercase leading-[70px]">Explore, Compete <br /> and Win Prizes</h2>
 
@@ -59,7 +59,7 @@ const Banner = () => {
 
                     </div>
 
-                    <div className="img">
+                    <div data-aos="fade-left" className="img">
                         <img src={bannerImg} alt="" />
                     </div>
                 </div>

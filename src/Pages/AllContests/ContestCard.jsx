@@ -9,7 +9,7 @@ const ContestCard = ({ item }) => {
     const { _id, contestName, image, participants, description } = item;
 
     return (
-        <div className="text-white bg-forth p-4 rounded-lg group flex flex-col justify-center">
+        <div data-aos="fade-up-left" className="text-white bg-forth p-4 rounded-lg group flex flex-col justify-center">
             <div className="img max-h-fit">
                 <img src={image} alt="" className="lg:w-80 h-80 object-cover rounded-lg group-hover:scale-110 transition" style={{ overflow: "hidden" }} />
             </div>

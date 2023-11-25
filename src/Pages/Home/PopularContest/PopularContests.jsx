@@ -33,7 +33,7 @@ const PopularContests = () => {
     }
 
     return (
-        <div className="bg-tertiary">
+        <div data-aos="flip-left" className="bg-tertiary">
             <Container>
                 <div className="w-fit mx-auto">
                     <SectionHeading

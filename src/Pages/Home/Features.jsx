@@ -9,7 +9,7 @@ const Features = () => {
         <div className="features-bg text-white py-40">
             <Container>
                 <div className="flex flex-col lg:flex-row items-center">
-                    <div className="text lg:w-3/5">
+                    <div data-aos="fade-left" className="text lg:w-3/5">
                         <SectionHeading
                             subHeading="Ignite Your Contesting Spirit"
                             heading="Prizo - Where Passion Meets Competition and Triumph Leads to Rewards!"
@@ -23,7 +23,7 @@ const Features = () => {
                         </div>
                     </div>
 
-                    <div className="features">
+                    <div data-aos="fade-right" className="features">
                         <Feather />
                     </div>
                 </div>

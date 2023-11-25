@@ -3,7 +3,7 @@
 
 const FeatureCard = ({ icon, title, description }) => {
     return (
-        <div className="max-w-xs rounded-lg overflow-hidden shadow-lg bg-secondary text-white p-4">
+        <div data-aos="fade-left" className="max-w-xs rounded-lg overflow-hidden shadow-lg bg-secondary text-white p-4">
             <div className="p-4">
                 <div className="flex items-center bg-primary rounded-full p-4 justify-center mb-4">
                     {icon}
