@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const Footer = () => {

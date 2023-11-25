@@ -1,0 +1,19 @@
+.slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+
+.winner-bg {
+    background-image: url("../../../assets/images/winner.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.motivation-bg {
+    background-image: url("../../../assets/images/motivation.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}

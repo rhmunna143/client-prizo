@@ -17,7 +17,7 @@ const PopularContests = () => {
                     />
                 </div>
 
-                <div className="popular py-52">
+                <div className="popular py-20">
                     {/* add popular cards here.... */}
                     {/* add popular cards here.... */}
                     {/* add 6666 popular cards here.... */}
