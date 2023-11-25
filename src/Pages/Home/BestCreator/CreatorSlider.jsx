@@ -28,7 +28,7 @@ const TopCreator = ({ top }) => {
         <div className="carousel__cell number-slide1 py-[200px] w-5/6 text-white slide text-2xl slide1-bg space-y-4">
             <h2 className="">{top?.contestCreator}</h2>
             <img className="w-20 h-20 aspect-square rounded-full" src={top?.creatorPhotoUrl} alt="creator img" />
-            <h3>{top?.contestName}</h3>
+            <h3>{top?.contestName.slice(0, 20)}</h3>
             <h5 className="text-sm w-40">{top?.description.slice(0, 45)}</h5>
         </div>
     )
@@ -50,6 +50,11 @@ const CreatorSlider = () => {
     }, [])
 
     const tops = contests.slice(0, 3)
+    let one = tops[0];
+    let two = tops[1];
+    let three = tops[2];
+
+    // console.table(one, two, three)
 
     const [sliderRef] = useKeenSlider(
         {
@@ -65,9 +70,13 @@ const CreatorSlider = () => {
         <div className="wrapper">
             <div className="scene">
                 <div className="carousel keen-slider" ref={sliderRef}>
-                    {
+                    {/* {
                         tops.map(top => <TopCreator top={top} key={top._id} />)
-                    }
+                    } */}
+
+                    <TopCreator top={one} />
+                    <TopCreator top={two} />
+                    <TopCreator top={three} />
                 </div>
             </div>
         </div>

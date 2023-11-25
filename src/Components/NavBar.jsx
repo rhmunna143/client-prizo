@@ -49,6 +49,7 @@ const Navbar = () => {
                         {!user && <RegisterMenu />}
 
                         {/* user */}
+
                         {
                             !user ? ""
                                 :
@@ -77,6 +78,7 @@ const Navbar = () => {
 
 
                         {!user && <LoginBtn />}
+
                     </div>
 
                     {/* Hamburger Menu (for smaller devices) */}
@@ -122,6 +124,7 @@ const Navbar = () => {
                     {!user && <RegisterMenu />}
 
                     {/* user */}
+
                     {
                         user && <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="bg-primary w-12 h-12 aspect-square rounded-full m-1 flex items-center justify-center">
@@ -129,6 +132,7 @@ const Navbar = () => {
                             </div>
                             <ul className="dropdown-content z-[1] menu p-2 text-base shadow text-white rounded-lg bg-tertiary w-52">
                                 <li className='cursor-text'><p className="font-semibold text-base cursor-text">User Name</p></li>
+                                
                                 <li>
                                     <NavLink
                                         to="/dashboard"
@@ -149,6 +153,7 @@ const Navbar = () => {
                     <br />
 
                     {!user && <LoginBtn />}
+
                 </div>
             </div>
         </nav>

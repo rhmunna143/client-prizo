@@ -68,7 +68,7 @@ const DemoCarousel = () => {
 
                     <h2 className="text-4xl font-bold">Latest Winner</h2>
                     <div className="img w-64 h-64 rounded-full aspect-square bg-tertiary my-5">
-                        <img src={lastWinner?.image} alt="winner" className="w-60 h-60 rounded-full aspect-square" />
+                        <img src={lastWinner?.photoURL} alt="winner" className="w-60 h-60 rounded-full aspect-square" />
                     </div>
 
                     <h4 className="text-3xl font-bold capitalize">{lastWinner?.userName}</h4>
