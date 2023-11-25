@@ -5,7 +5,7 @@ import DemoCarousel from "./DemoCarousel";
 
 const Insights = () => {
     return (
-        <div className="bg-secondary py-20">
+        <div className="bg-secondary pt-20">
             <Container>
                 <div className="heading w-fit mx-auto pb-10">
                     <SectionHeading
