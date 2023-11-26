@@ -4,13 +4,14 @@ import CreatorSlider from "./CreatorSlider";
 
 const BestCreator = () => {
     return (
-        <div className="bg-tertiary pt-20">
+        <div className="bg-tertiary py-20">
             <Container>
                 <div className="w-fit mx-auto py-10">
                     <SectionHeading
                         align="center"
                         subHeading="Top contest creators"
                         heading="best creators"
+                        text="The surprising all time best contest creators"
                     />
                 </div>
             </Container>

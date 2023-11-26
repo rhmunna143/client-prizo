@@ -86,19 +86,22 @@
 }
 
 .slide1-bg {
-    background-image: url("../../../assets/images/bg1.jpg");
+    background: url("../../../assets/images/bg1.jpg"), rgba(0, 0, 0, 0.65);
     background-repeat: no-repeat;
     background-size: cover;
+    background-blend-mode: overlay;
 }
 
 .slide2-bg {
-    background-image: url("../../../assets/images/bg2.jpg");
+    background: url("../../../assets/images/bg2.jpg"), rgba(0, 0, 0, 0.65);
     background-repeat: no-repeat;
     background-size: cover;
+    background-blend-mode: overlay;
 }
 
 .slide3-bg {
-    background-image: url("../../../assets/images/bg3.jpg");
+    background: url("../../../assets/images/bg3.jpg"), rgba(0, 0, 0, 0.65);
     background-repeat: no-repeat;
     background-size: cover;
+    background-blend-mode: overlay;
 }
