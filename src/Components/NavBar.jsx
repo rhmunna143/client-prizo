@@ -49,7 +49,7 @@ const Navbar = () => {
                                 <img src="" alt="" />
                             </div>
                             <ul className="dropdown-content z-[1] menu p-2 text-base shadow text-white rounded-lg bg-tertiary w-52">
-                                <li className='cursor-text'><p className="font-medium text-lg cursor-text">User Name</p></li>
+                                <li className='cursor-text'><p className="font-semibold text-base cursor-text">User Name</p></li>
                                 <li>
                                     <NavLink
                                         to="/dashboard"
@@ -60,7 +60,7 @@ const Navbar = () => {
                                         Dashboard
                                     </NavLink>
                                 </li>
-                                <li className='font-medium w-1/2 mb-4 ml-3'><LogoutBtn /></li>
+                                <li className='font-medium w-1/2 mb-4 ml-3 mt-4'><LogoutBtn /></li>
                             </ul>
                         </div>
 

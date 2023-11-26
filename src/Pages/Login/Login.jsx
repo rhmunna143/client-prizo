@@ -32,7 +32,7 @@ const Login = () => {
 
                         {errors.password && <span className="text-red-600">This field is required</span>}
 
-                        <input type="submit" value="Login" className="bg-primary text-tertiary px-6 py-2 rounded-lg mt-5 font-medium text-lg w-full hover:bg-transparent hover:border-primary border-transparent border hover:text-white uppercase" />
+                        <input type="submit" value="Login" className="bg-primary text-tertiary px-6 py-2 rounded-lg mt-5 font-medium text-lg w-full hover:bg-transparent hover:border-primary border-transparent border hover:text-white uppercase cursor-pointer" />
                     </form>
 
                     <div className="social">
