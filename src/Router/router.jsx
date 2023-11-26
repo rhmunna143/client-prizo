@@ -20,11 +20,13 @@ import ManageUser from "../Pages/Dashboards/Admin/ManageUser/ManageUser";
 import ManageContest from "../Pages/Dashboards/Admin/ManageContest/ManageContest";
 import UpdateContests from "../Pages/Dashboards/Admin/UpdateContests/UpdateContests";
 import AddContest from "../Pages/Dashboards/Creator/Add/AddContest";
+import NotFoundPage from "../Pages/NotFound/NotFound";
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <RootLayout />,
+        errorElement: <NotFoundPage />,
         children: [
             {
                 path: '/',
