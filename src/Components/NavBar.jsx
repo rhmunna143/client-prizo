@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import RegisterMenu from './MenuItems/RegisterMenue';
 import LoginBtn from './MenuItems/LoginBtn';
+import LogoutBtn from './MenuItems/LogoutBtn';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -33,12 +34,37 @@ const Navbar = () => {
                     {/* Menu Items for LG devices */}
                     <div className="hidden md:flex md:space-x-4 items-center">
                         {menuItems.map(item => (
-                            <Link key={item.id} to={item.link} className="text-white hover:text-gray-300 font-medium">
+                            <NavLink key={item.id} to={item.link} className={({ isActive, isPending }) =>
+                                isPending ? "pending py-2 px-4" : isActive ? "active bg-forth rounded-lg py-2 px-4 text-white font-medium" : "block py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg"
+                            }>
                                 {item.title}
-                            </Link>
+                            </NavLink>
                         ))}
 
                         <RegisterMenu />
+
+                        {/* user */}
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="bg-primary w-12 h-12 aspect-square rounded-full m-1 flex items-center justify-center">DP
+                                <img src="" alt="" />
+                            </div>
+                            <ul className="dropdown-content z-[1] menu p-2 text-base shadow text-white rounded-lg bg-tertiary w-52">
+                                <li className='cursor-text'><p className="font-medium text-lg cursor-text">User Name</p></li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "active bg-forth py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg" : "py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg"
+                                        }
+                                    >
+                                        Dashboard
+                                    </NavLink>
+                                </li>
+                                <li className='font-medium w-1/2 mb-4 ml-3'><LogoutBtn /></li>
+                            </ul>
+                        </div>
+
+
                         <LoginBtn />
                     </div>
 
@@ -71,12 +97,15 @@ const Navbar = () => {
 
             {/* Responsive Menu */}
             <div className={`${isOpen ? 'block absolute right-4 px-4 pb-2' : 'hidden'} md:hidden bg-tertiary text-white font-medium`}>
-                <div className="px-4 pt-2 pb-3 space-y-1">
+                <div className="px-4 pt-2 pb-3 flex flex-col items-center space-y-1">
+
                     {/* Map through the same menu items array for smaller devices */}
                     {menuItems.map(item => (
-                        <Link key={item.id} to={item.link} className="block hover:text-gray-300">
+                        <NavLink key={item.id} to={item.link} className={({ isActive, isPending }) =>
+                            isPending ? "pending py-2 px-4" : isActive ? "active rounded-lg bg-forth py-2 px-4 text-white font-medium" : "block py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg"
+                        }>
                             {item.title}
-                        </Link>
+                        </NavLink>
                     ))}
 
                     <RegisterMenu />
@@ -84,7 +113,7 @@ const Navbar = () => {
                     <br />
                     <hr className='' />
                     <br />
-                    
+
                     <LoginBtn />
                 </div>
             </div>

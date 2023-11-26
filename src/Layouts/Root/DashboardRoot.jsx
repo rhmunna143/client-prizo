@@ -1,8 +1,11 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Container from "../../Components/Container";
-import { FaRunning, FaTrophy } from "react-icons/fa"
+import { FaFlipboard, FaRunning, FaTrophy } from "react-icons/fa"
 import LogoutBtn from "../../Components/MenuItems/LogoutBtn";
 import { CgProfile } from "react-icons/cg";
+import { MdBookmarkAdded, MdDashboardCustomize, MdManageAccounts, MdOutlineManageHistory } from "react-icons/md";
+import { IoIosAddCircle } from "react-icons/io";
+import { VscFileSubmodule } from "react-icons/vsc";
 
 const DashboardRoot = () => {
     return (
@@ -26,11 +29,121 @@ const DashboardRoot = () => {
                                 </div>
 
                                 <div className="text-center">
-                                    <h2 className="text-2xl my-4">User name</h2>
+                                    <h2 className="text-2xl mt-4">User name</h2>
+                                    <h6 className="mt-2 mb-4">Role</h6>
                                     <LogoutBtn />
                                 </div>
                             </div>
                         </div>
+
+
+
+
+
+                        {/* dashboard + Leaderboard */}
+                        <div className="user bg-forth px-2 py-5 rounded-lg text-lg font-medium space-y-3">
+
+                            <div className="bg-tertiary py-2 px-2 rounded-lg">
+                                <NavLink
+                                    to="/dashboard/home"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending flex items-center gap-2" : isActive ? "active py-1 rounded-lg bg-black px-4 text-white y flex items-center gap-2" : " px-4  py-1 flex items-center gap-2"
+                                    }
+                                >
+                                    <MdDashboardCustomize />  Dashboard
+                                </NavLink>
+                            </div>
+
+                            <div className="bg-tertiary py-2 px-2 rounded-lg">
+                                <NavLink
+                                    to="/dashboard/leaderboard"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending" : isActive ? "active py-1 rounded-lg bg-black px-4 flex items-center gap-2" : " px-4 py-1 flex items-center gap-2"
+                                    }
+                                >
+                                    <FaFlipboard />  Leaderboard
+                                </NavLink>
+                            </div>
+
+
+                        </div>
+
+
+
+
+
+
+                        {/* admin menus */}
+                        <div className="user bg-forth px-2 py-5 rounded-lg text-lg font-medium space-y-3">
+
+                            <div className="bg-tertiary py-2 px-2 rounded-lg">
+                                <NavLink
+                                    to="/dashboard/manage-users"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending flex items-center gap-2" : isActive ? "active py-1 rounded-lg bg-black px-4 text-white y flex items-center gap-2" : " px-4  py-1 flex items-center gap-2"
+                                    }
+                                >
+                                    <MdManageAccounts />  Manage Users
+                                </NavLink>
+                            </div>
+
+                            <div className="bg-tertiary py-2 px-2 rounded-lg">
+                                <NavLink
+                                    to="/dashboard/manage-contests"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending" : isActive ? "active py-1 rounded-lg bg-black px-4 flex items-center gap-2" : " px-4 py-1 flex items-center gap-2"
+                                    }
+                                >
+                                    <MdOutlineManageHistory />  Manage Contests
+                                </NavLink>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        {/* creator menus */}
+                        <div className="user bg-forth px-2 py-5 rounded-lg text-lg font-medium space-y-3">
+
+                            <div className="bg-tertiary py-2 px-2 rounded-lg">
+                                <NavLink
+                                    to="/dashboard/add"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending flex items-center gap-2" : isActive ? "active py-1 rounded-lg bg-black px-4 text-white y flex items-center gap-2" : " px-4  py-1 flex items-center gap-2"
+                                    }
+                                >
+                                    <IoIosAddCircle />  Add Contest
+                                </NavLink>
+                            </div>
+
+                            <div className="bg-tertiary py-2 px-2 rounded-lg">
+                                <NavLink
+                                    to="/dashboard/created"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending" : isActive ? "active py-1 rounded-lg bg-black px-4 flex items-center gap-2" : " px-4 py-1 flex items-center gap-2"
+                                    }
+                                >
+                                    <MdBookmarkAdded />  Created Contests
+                                </NavLink>
+                            </div>
+
+                            <div className="bg-tertiary py-2 px-2 rounded-lg">
+                                <NavLink
+                                    to="/dashboard/submitted"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending" : isActive ? "active py-1 rounded-lg bg-black px-4 flex items-center gap-2" : " px-4 py-1 flex items-center gap-2"
+                                    }
+                                >
+                                    <VscFileSubmodule />  Submitted Contests
+                                </NavLink>
+                            </div>
+                        </div>
+
+
+
+
 
 
 
@@ -69,45 +182,14 @@ const DashboardRoot = () => {
                                     <CgProfile />  Profile
                                 </NavLink>
                             </div>
-
-
                         </div>
 
 
 
 
-                        {/* creator menus */}
-
-
-
-
-
-
-
-
-
-
-
-
-                        {/* admin menus */}
-
-
-
-
-
-
-
-
-
-                        <div className="user bg-forth p-6 rounded-lg">
-                            dash
-                        </div>
-                        <div className="user bg-forth p-6 rounded-lg">
-                            dash
-                        </div>
                     </div>
 
-                    <div className="bg-forth h-screen p-6 rounded-lg w-full py-96">
+                    <div className="bg-forth min-h-full px-6 py-8 rounded-lg w-full">
                         <Outlet />
                     </div>
                 </div>

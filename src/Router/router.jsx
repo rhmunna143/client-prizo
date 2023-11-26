@@ -13,6 +13,13 @@ import DashRoot from "../Pages/Dashboards/Root/DashRoot";
 import Participated from "../Pages/Dashboards/Participated/Participated";
 import Wined from "../Pages/Dashboards/Wined/Wined";
 import Profile from "../Pages/Dashboards/Profile/Profile";
+import Leaderboard from "../Pages/Dashboards/Leaderboard/Leaderboard";
+import CreatedContest from "../Pages/Dashboards/Creator/Created/CreatedContest";
+import SubmittedContest from "../Pages/Dashboards/Creator/Submitted/SubmittedContest";
+import ManageUser from "../Pages/Dashboards/Admin/ManageUser/ManageUser";
+import ManageContest from "../Pages/Dashboards/Admin/ManageContest/ManageContest";
+import UpdateContests from "../Pages/Dashboards/Admin/UpdateContests/UpdateContests";
+import AddContest from "../Pages/Dashboards/Creator/Add/AddContest";
 
 const router = createBrowserRouter([
     {
@@ -51,6 +58,9 @@ const router = createBrowserRouter([
         ]
     },
 
+
+    // different layout
+
     {
         path: "login",
         element: <Login></Login>
@@ -61,15 +71,27 @@ const router = createBrowserRouter([
         element: <Register></Register>
     },
 
+
+    // dashboard layout
+
     {
         path: "dashboard",
         element: <DashboardRoot />,
         children: [
+
+            // common routes
             {
                 path: "home",
                 element: <DashRoot></DashRoot>
             },
 
+            {
+                path: "leaderboard",
+                element: <Leaderboard></Leaderboard>
+            },
+
+
+            // users routes
             {
                 path: "joined",
                 element: <Participated></Participated>
@@ -83,11 +105,43 @@ const router = createBrowserRouter([
             {
                 path: "profile",
                 element: <Profile></Profile>
+            },
+
+
+            // creator routes
+            {
+                path: "add",
+                element: <AddContest></AddContest>
+            },
+
+            {
+                path: "created",
+                element: <CreatedContest></CreatedContest>
+            },
+
+            {
+                path: "submitted",
+                element: <SubmittedContest></SubmittedContest>
+            },
+
+
+            // admin routes
+            {
+                path: "manage-users",
+                element: <ManageUser></ManageUser>
+            },
+
+            {
+                path: "manage-contests",
+                element: <ManageContest></ManageContest>
+            },
+
+            {
+                path: "update/:id",
+                element: <UpdateContests></UpdateContests>
             }
         ]
     },
-
-    
 ])
 
 export default router;
