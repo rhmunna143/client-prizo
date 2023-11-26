@@ -8,6 +8,11 @@ import Register from "../Pages/Register/Register";
 import AllContests from "../Pages/AllContests/AllContests";
 import DetailsPage from "../Pages/Details/DetailsPage";
 import PaymentsPage from "../Pages/Payments/PaymentsPage";
+import DashboardRoot from "../Layouts/Root/DashboardRoot";
+import DashRoot from "../Pages/Dashboards/Root/DashRoot";
+import Participated from "../Pages/Dashboards/Participated/Participated";
+import Wined from "../Pages/Dashboards/Wined/Wined";
+import Profile from "../Pages/Dashboards/Profile/Profile";
 
 const router = createBrowserRouter([
     {
@@ -55,6 +60,34 @@ const router = createBrowserRouter([
         path: "register",
         element: <Register></Register>
     },
+
+    {
+        path: "dashboard",
+        element: <DashboardRoot />,
+        children: [
+            {
+                path: "home",
+                element: <DashRoot></DashRoot>
+            },
+
+            {
+                path: "joined",
+                element: <Participated></Participated>
+            },
+
+            {
+                path: "wined",
+                element: <Wined></Wined>
+            },
+
+            {
+                path: "profile",
+                element: <Profile></Profile>
+            }
+        ]
+    },
+
+    
 ])
 
 export default router;
