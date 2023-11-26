@@ -1,10 +1,13 @@
+/* eslint-disable react/no-unescaped-entities */
 import { FaHome } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import img from "../../assets/images/error-image.png";
+import img2 from "../../assets/images/error.png";
 
 
 const NotFoundPage = () => {
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-secondary text-white">
+        <div className="flex flex-col items-center justify-center min-h-screen bg-secondary text-white">
             <h1 className="text-5xl font-bold mb-4">404 - Not Found</h1>
             <p className="text-lg mb-8">Oops! The page you're looking for doesn't exist.</p>
             <Link to={"/"} className="bg-primary text-tertiary text-lg font-medium px-6 py-2 rounded-lg hover:bg-white hover:text-black flex items-center gap-2"> <FaHome /> Go Home</Link>
@@ -21,6 +24,11 @@ const NotFoundPage = () => {
                     clipRule="evenodd"
                 />
             </svg>
+
+            <div className="img flex flex-col items-center justify-center">
+                <img src={img} alt="" className="absolute top-96 z-10"/>
+                <img src={img2} alt="" className="absolute top-96 z-0"/>
+            </div>
         </div>
     );
 };
