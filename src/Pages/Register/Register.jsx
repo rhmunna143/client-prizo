@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 
 const Register = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
+    const role = "user";
+    
     const onSubmit = data => {
         console.log(data);
     }

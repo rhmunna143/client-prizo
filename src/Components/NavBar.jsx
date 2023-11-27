@@ -1,11 +1,14 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, Navigate } from 'react-router-dom';
 import RegisterMenu from './MenuItems/RegisterMenue';
 import LoginBtn from './MenuItems/LoginBtn';
 import LogoutBtn from './MenuItems/LogoutBtn';
+import useAllContext from '../Hooks/useAllContext';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { user, loading } = useAllContext();
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -41,31 +44,33 @@ const Navbar = () => {
                             </NavLink>
                         ))}
 
-                        <RegisterMenu />
+                        {!user && <RegisterMenu />}
 
                         {/* user */}
-                        <div className="dropdown dropdown-end">
-                            <div tabIndex={0} role="button" className="bg-primary w-12 h-12 aspect-square rounded-full m-1 flex items-center justify-center">DP
-                                <img src="" alt="" />
+                        {
+                            user && <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="bg-primary w-12 h-12 aspect-square rounded-full m-1 flex items-center justify-center">
+                                    <img src={user?.photoURL} alt="dp" />
+                                </div>
+                                <ul className="dropdown-content z-[1] menu p-2 text-base shadow text-white rounded-lg bg-tertiary w-52">
+                                    <li className='cursor-text'><p className="font-semibold text-base cursor-text">User Name</p></li>
+                                    <li>
+                                        <NavLink
+                                            to="/dashboard"
+                                            className={({ isActive, isPending }) =>
+                                                isPending ? "pending" : isActive ? "active bg-forth py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg" : "py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg"
+                                            }
+                                        >
+                                            Dashboard
+                                        </NavLink>
+                                    </li>
+                                    <li className='font-medium w-1/2 mb-4 ml-3 mt-4'><LogoutBtn /></li>
+                                </ul>
                             </div>
-                            <ul className="dropdown-content z-[1] menu p-2 text-base shadow text-white rounded-lg bg-tertiary w-52">
-                                <li className='cursor-text'><p className="font-semibold text-base cursor-text">User Name</p></li>
-                                <li>
-                                    <NavLink
-                                        to="/dashboard"
-                                        className={({ isActive, isPending }) =>
-                                            isPending ? "pending" : isActive ? "active bg-forth py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg" : "py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg"
-                                        }
-                                    >
-                                        Dashboard
-                                    </NavLink>
-                                </li>
-                                <li className='font-medium w-1/2 mb-4 ml-3 mt-4'><LogoutBtn /></li>
-                            </ul>
-                        </div>
+                        }
 
 
-                        <LoginBtn />
+                        {!user && <LoginBtn />}
                     </div>
 
                     {/* Hamburger Menu (for smaller devices) */}
@@ -108,13 +113,36 @@ const Navbar = () => {
                         </NavLink>
                     ))}
 
-                    <RegisterMenu />
+                    {!user && <RegisterMenu />}
+
+                    {/* user */}
+                    {
+                        user && <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="bg-primary w-12 h-12 aspect-square rounded-full m-1 flex items-center justify-center">
+                                <img src={user?.photoURL} alt="dp" />
+                            </div>
+                            <ul className="dropdown-content z-[1] menu p-2 text-base shadow text-white rounded-lg bg-tertiary w-52">
+                                <li className='cursor-text'><p className="font-semibold text-base cursor-text">User Name</p></li>
+                                <li>
+                                    <NavLink
+                                        to="/dashboard"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "active bg-forth py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg" : "py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg"
+                                        }
+                                    >
+                                        Dashboard
+                                    </NavLink>
+                                </li>
+                                <li className='font-medium w-1/2 mb-4 ml-3 mt-4'><LogoutBtn /></li>
+                            </ul>
+                        </div>
+                    }
 
                     <br />
                     <hr className='' />
                     <br />
 
-                    <LoginBtn />
+                    {!user && <LoginBtn />}
                 </div>
             </div>
         </nav>
