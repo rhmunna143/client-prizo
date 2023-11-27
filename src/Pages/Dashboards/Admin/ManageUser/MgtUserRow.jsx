@@ -4,17 +4,13 @@
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
 
-const MgtUserRow = ({ user, refetch }) => {
+const MgtUserRow = ({ user }) => {
     const [userRole, setUserRole] = useState(user.role);
 
-    const { displayName, role, uid, photoURL, email } = user;
-
+    console.log(user);
 
     const handleUpdateRole = (selectedRole) => {
         setUserRole(selectedRole);
-
-
-        refetch()
     };
 
 
@@ -26,21 +22,21 @@ const MgtUserRow = ({ user, refetch }) => {
                     <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                             {/* update img */}
-                            <img src={photoURL} alt="Avatar Tailwind CSS Component" />
+                            <img src={user?.photoURL} alt="Avatar Tailwind CSS Component" />
                         </div>
                     </div>
 
                     <div className="text-white">
-                        <div className="font-bold">{displayName}</div>
-                        <div className="text-sm opacity-50">{email}</div>
+                        <div className="font-bold">{user?.displayName}</div>
+                        <div className="text-sm opacity-50">{user?.email}</div>
                     </div>
                 </div>
             </td>
 
-            <td>{userRole}</td>
+            <td>{user?.role}</td>
 
             <th>
-                <select defaultValue={role}
+                <select defaultValue={user?.role}
                     onChange={(event) => handleUpdateRole(event.target.value)}
                     className="select select-bordered w-fit max-w-xs bg-tertiary text-white"
                 >

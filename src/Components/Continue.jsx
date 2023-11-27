@@ -9,7 +9,6 @@ import { baseURL } from "../Hooks/useAxiosSecure";
 const Continue = () => {
     const { socialSignIn, path, setErr } = useAllContext();
     const [currentUser, setCurrentUser] = useState("");
-    const role = "user";
 
     const handleSocial = () => {
 
@@ -19,16 +18,21 @@ const Continue = () => {
 
                 if (user) {
 
-                    // const saveUser = {
-                    //     displayName: user?.displayName,
-                    //     photoURL: user?.photoURL,
-                    //     role: role,
-                    //     uid: user?.uid,
-                    //     email: user?.email,
-                    //     password: null
-                    // }
+                    const displayName = user?.displayName;
+                    const photoURL = user?.photoURL;
+                    const role = "user";
+                    const uid = user?.uid;
+                    const email = user?.email;
 
-                    axios.post(`${baseURL}/users`, { ...user,  role }, { withCredentials: true })
+                    const userData = {
+                        displayName,
+                        photoURL,
+                        role,
+                        uid,
+                        email,
+                    }
+
+                    axios.post(`${baseURL}/users`, userData, { withCredentials: true })
                         .then(res => {
                             const savedUser = res.data;
                         })
@@ -46,6 +50,7 @@ const Continue = () => {
                 console.log(err);
             })
     }
+
     return (
         <div className="">
 

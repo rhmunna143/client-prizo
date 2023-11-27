@@ -13,27 +13,16 @@ import { auth } from "../../Config/firebase.config";
 import { updateProfile } from "firebase/auth";
 
 const Register = () => {
+    const [userIfo, setUserInfo] = useState({})
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const [currentUser, setCurrentUser] = useState(null);
-    const { registerAccount, setErr } = useAllContext();
+    const { registerAccount, setErr, user } = useAllContext();
 
     const axiosSecure = useAxiosSecure();
 
-    const role = "user";
-
-
-    /**
-     * {
-    "name": "Munna",
-    "email": "rhmunna19@gmail.com",
-    "password": "P@ssword",
-    "image": "https://i.ibb.co/4F812XJ/mahdi-aminrad-91-KH4-Fun9lc-unsplash.jpg"
-}
-     * 
-     */
-
-
     const onSubmit = data => {
+        const name = data.name;
+        const image = data.image;
 
         registerAccount(data?.email, data?.password)
             .then(res => {
@@ -55,16 +44,21 @@ const Register = () => {
                 //         console.log("data from axios",data);
                 //     })
 
-                // const saveUser = {
-                //     displayName: user?.displayName,
-                //     photoURL: user?.photoURL,
-                //     role: role,
-                //     uid: user?.uid,
-                //     email: user?.email,
-                //     password: data?.password
-                // }
+                const displayName = name;
+                const photoURL = image;
+                const role = "user";
+                const uid = user?.uid;
+                const email = user?.email;
 
-                axios.post(`${baseURL}/users`, { ...currentUser, role }, { withCredentials: true })
+                const userData = {
+                    displayName,
+                    photoURL,
+                    role,
+                    uid,
+                    email,
+                }
+
+                axios.post(`${baseURL}/users`, userData, { withCredentials: true })
                     .then(res => {
                         if (res?.data?.exist) {
                             toast.error("Already have an account! Please login.")
