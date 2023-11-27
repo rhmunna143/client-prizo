@@ -26,6 +26,12 @@ const ContestProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider);
     }
 
+
+    const logout = () => {
+
+       return signOut(auth)
+    }
+
     useEffect(() => {
 
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -38,17 +44,6 @@ const ContestProvider = ({ children }) => {
         return () => unsubscribe();
     }, [])
 
-
-    const logout = () => {
-
-        signOut(auth).then(() => {
-            toast.success("Logout success. Login now!!!");
-        }).catch(err => {
-            toast.error(err.message);
-            console.error(err);
-        })
-    }
-
     const contestValue = {
         loading,
         setLoading,
@@ -58,7 +53,7 @@ const ContestProvider = ({ children }) => {
         user,
         path,
         setPath,
-        
+
 
     }
 

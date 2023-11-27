@@ -1,14 +1,15 @@
 /* eslint-disable no-unused-vars */
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, NavLink, Navigate } from 'react-router-dom';
 import RegisterMenu from './MenuItems/RegisterMenue';
 import LoginBtn from './MenuItems/LoginBtn';
 import LogoutBtn from './MenuItems/LogoutBtn';
 import useAllContext from '../Hooks/useAllContext';
+import { AllContext } from '../Hooks/ContestProvider';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { user, loading } = useAllContext();
+    const { user, loading } = useContext(AllContext);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -48,7 +49,9 @@ const Navbar = () => {
 
                         {/* user */}
                         {
-                            user && <div className="dropdown dropdown-end">
+                            !user ? "" 
+                            :
+                            <div className="dropdown dropdown-end">
                                 <div tabIndex={0} role="button" className="bg-primary w-12 h-12 aspect-square rounded-full m-1 flex items-center justify-center">
                                     <img src={user?.photoURL} alt="dp" />
                                 </div>
@@ -67,6 +70,8 @@ const Navbar = () => {
                                     <li className='font-medium w-1/2 mb-4 ml-3 mt-4'><LogoutBtn /></li>
                                 </ul>
                             </div>
+
+                         
                         }
 
 
