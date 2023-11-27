@@ -1,17 +1,78 @@
-/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useState } from "react";
 import { MdDelete } from "react-icons/md";
+import useAllContext, { baseURL } from "../../../../Hooks/useAllContext";
+import axios from "axios";
+import toast from "react-hot-toast";
+import swal from "sweetalert";
 
-const MgtUserRow = ({ user }) => {
-    const [userRole, setUserRole] = useState(user.role);
-
-    console.log(user);
+const MgtUserRow = ({ user, fetch }) => {
+    const { setErr } = useAllContext();
 
     const handleUpdateRole = (selectedRole) => {
-        setUserRole(selectedRole);
+
+        swal({
+            title: "Are you sure?",
+            text: `Do you want to assign ${user?.displayName} as the ${selectedRole} ?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axios.patch(`${baseURL}/users/update/${user.uid}`, { role: selectedRole },
+                        {
+                            withCredentials: true
+                        }
+                    ).then(res => {
+                        if (res?.data?._id) {
+                            toast.success("Role updated in: " + res?.data?.role);
+                        }
+
+                        if (!res?.data?._id) {
+                            return;
+                        }
+
+                        fetch();
+                    }).catch(err => {
+                        console.log(err);
+                        toast.error(err.message);
+                        setErr(err)
+                    })
+                } else {
+                    swal("The user role is not updated.");
+                }
+            });
+
     };
+
+    const handleDelete = async () => {
+        await swal({
+            title: "Are you sure?",
+            text: "Once deleted, the user have to recreate account!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axios.delete(`${baseURL}/users/delete/${user.uid}`, { withCredentials: true })
+                        .then(res => {
+                            if (res?.data?._id) {
+                                swal("The user is deleted!", {
+                                    icon: "success",
+                                });
+                            }
+
+                            if (!res?.data?._id) {
+                                window.location.reload();
+                            }
+                        })
+                } else {
+                    swal("The user account is not deleted.");
+                }
+            });
+    }
 
 
 
@@ -36,7 +97,7 @@ const MgtUserRow = ({ user }) => {
             <td>{user?.role}</td>
 
             <th>
-                <select defaultValue={user?.role}
+                <select value={user.role}
                     onChange={(event) => handleUpdateRole(event.target.value)}
                     className="select select-bordered w-fit max-w-xs bg-tertiary text-white"
                 >
@@ -47,7 +108,7 @@ const MgtUserRow = ({ user }) => {
             </th>
 
             <th>
-                <button className="btn btn-ghost btn-lg text-red-600"><MdDelete /></button>
+                <button onClick={handleDelete} className="btn btn-ghost btn-lg text-red-600"><MdDelete /></button>
             </th>
         </tr>
     );

@@ -13,7 +13,7 @@ const ManageUser = () => {
     const [users, setUsers] = useState([])
     const { setErr } = useAllContext();
 
-    const { data, isLoading, errors, refetch } = useQuery({
+    const { data, refetch, isLoading, errors } = useQuery({
         queryKey: ["data"],
         queryFn: async () => {
             const res = await axios.get(`${baseURL}/users`, { withCredentials: true })
@@ -61,7 +61,7 @@ const ManageUser = () => {
                         {/* row 1 */}
 
                         {
-                            users?.map(user => <MgtUserRow key={user._id} user={user} refetch={refetch} />)
+                            users?.map(user => <MgtUserRow key={user._id} user={user} fetch={refetch} />)
                         }
 
                     </tbody>
