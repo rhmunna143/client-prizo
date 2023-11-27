@@ -9,7 +9,6 @@ const MgtUserRow = ({ user, refetch }) => {
 
     const { displayName, role, uid, photoURL, email } = user;
 
-    console.log(user);
 
     const handleUpdateRole = (selectedRole) => {
         setUserRole(selectedRole);
@@ -18,7 +17,7 @@ const MgtUserRow = ({ user, refetch }) => {
         refetch()
     };
 
-    console.log(userRole);
+
 
     return (
         <tr>
