@@ -9,19 +9,6 @@ import axios from "axios";
 import { baseURL } from "../../../../Hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 
-/**
- * {
-    "contestName": "game",
-    "image": "https://i.ibb.co/4F812XJ/mahdi-aminrad-91-KH4-Fun9lc-unsplash.jpg",
-    "description": "Sprite is a lemon-lime flavored soda known for its crisp and refreshing taste. It's caffeine-free and offers a clear, bubbly experience with a zesty citrus twist.",
-    "prize": "44",
-    "prizeMoney": "555",
-    "submissionDetails": "hmm",
-    "deadline": "2023-11-30"
-}
- */
-
-
 
 const people = [
     { name: 'Select A Tag' },
@@ -39,22 +26,11 @@ const AddContest = () => {
     const { user, setErr } = useAllContext();
 
 
-
     const contestCreator = user?.displayName;
     const creatorUid = user?.uid;
     const status = "pending";
     const participants = 0;
-    const tag = selected;
-
-
-
-    /**
-     * TODO: 
-     * add---- creatorUsername, 
-     * creatorUid, 
-     * participants count: 0
-     * 
-     */
+    const tag = selected.name;
 
 
     const onSubmit = data => {
@@ -64,7 +40,8 @@ const AddContest = () => {
             contestCreator,
             creatorUid,
             status,
-            participants
+            participants,
+            tag
         }, { withCredentials: true })
             .then(res => {
 
