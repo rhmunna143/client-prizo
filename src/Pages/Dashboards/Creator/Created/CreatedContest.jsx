@@ -13,13 +13,14 @@ const CreatedContest = () => {
 
     const uid = user.uid;
 
-    const { data, isLoading, errors, refetch } = useQuery({
+    const { data: contests = [], isLoading, errors, refetch } = useQuery({
         queryKey: ["data"],
         queryFn: async () => {
             const res = await axios.get(`${baseURL}/contest?uid=${uid}`, { withCredentials: true })
 
             return res.data;
-        }
+        },
+        initialData: []
     })
 
     if (isLoading) {
@@ -52,7 +53,7 @@ const CreatedContest = () => {
                         {/* row 1 */}
 
                         {
-                            data?.map(row => <CreatedTableRow key={row._id} data={row} refetch={refetch} />)
+                            contests?.map(row => <CreatedTableRow key={row._id} data={row} refetch={refetch} />)
                         }
 
 

@@ -6,8 +6,13 @@ import { CgProfile } from "react-icons/cg";
 import { MdBookmarkAdded, MdDashboardCustomize, MdManageAccounts, MdOutlineManageHistory } from "react-icons/md";
 import { IoIosAddCircle } from "react-icons/io";
 import { VscFileSubmodule } from "react-icons/vsc";
+import useAllContext from "../../Hooks/useAllContext";
+import useRoleCheck from "../../Hooks/useCreatorCheck";
 
 const DashboardRoot = () => {
+    const { user } = useAllContext();
+    const role = useRoleCheck();
+
     return (
         <div className="bg-secondary py-20">
             <Container>
@@ -23,14 +28,16 @@ const DashboardRoot = () => {
 
                         {/* user info */}
                         <div className="user bg-forth p-6 rounded-lg text-white font-bold capitalize">
-                            <div className="cont w-fit mx-auto">
-                                <div className="pp w-40 h-40 aspect-square rounded-full bg-primary">
-                                    <img src="" alt="" className="w-40 h-40 aspect-square rounded-full" />
-                                </div>
+                            <div className="cont w-fit mx-auto flex flex-col items-center justify-center">
+                                <Link to={"/dashboard/profile"}>
+                                    <div className="pp w-40 h-40 aspect-square rounded-full bg-primary">
+                                        <img src={user?.photoURL} alt="User DP" className="w-40 h-40 aspect-square rounded-full" />
+                                    </div>
+                                </Link>
 
-                                <div className="text-center">
-                                    <h2 className="text-2xl mt-4">User name</h2>
-                                    <h6 className="mt-2 mb-4">Role</h6>
+                                <div className="text-center flex flex-col items-center justify-center">
+                                    <Link to={"/dashboard/profile"}><h2 className="text-2xl mt-4">{user?.displayName}</h2></Link>
+                                    <h6 className="mt-2 mb-4">{role ? role : "New User"}</h6>
                                     <LogoutBtn />
                                 </div>
                             </div>

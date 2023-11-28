@@ -87,6 +87,7 @@ const UpdateContests = () => {
 
                 <form onSubmit={handleSubmit(onSubmit)}>
 
+                    <p className="mb-1 text-sm">Contest Name:</p>
                     <input type="text" defaultValue={contests?.contestName} placeholder="Contest Name" {...register("contestName", { required: true })} className="px-4 py-2 bg-forth h-12 text-lg text-white w-full rounded-lg border-[0.5px] border-primary " />
 
                     <br />
@@ -96,7 +97,7 @@ const UpdateContests = () => {
                     <br />
 
 
-
+                    <p className="mb-1 text-sm">Image URL:</p>
                     <input type="text" defaultValue={contests?.image} placeholder="Image URL" {...register("image", { required: true })} className="px-4 py-2 bg-forth h-12 text-lg text-white w-full rounded-lg border-[0.5px] border-primary " />
 
                     <br />
@@ -107,7 +108,7 @@ const UpdateContests = () => {
 
 
 
-
+                    <p className="mb-1 text-sm">Description:</p>
                     <input type="text" defaultValue={contests?.description} placeholder="Description" {...register("description", { required: true })} className="px-4 py-2 bg-forth h-28 text-lg text-white w-full rounded-lg border-[0.5px] border-primary " />
 
                     <br />
@@ -119,7 +120,7 @@ const UpdateContests = () => {
 
 
 
-
+                    <p className="mb-1 text-sm">Prize:</p>
                     <input type="text" defaultValue={contests?.prize} placeholder="Prize" {...register("prize", { required: true })} className="px-4 py-2 bg-forth h-12 text-lg text-white w-full rounded-lg border-[0.5px] border-primary " />
 
                     <br />
@@ -129,7 +130,7 @@ const UpdateContests = () => {
                     <br />
 
 
-
+                    <p className="mb-1 text-sm">Prize money:</p>
                     <input type="number" defaultValue={contests?.prizeMoney} placeholder="Prize Money" {...register("prizeMoney", { required: true })} className="px-4 py-2 bg-forth h-12 text-lg text-white w-full rounded-lg border-[0.5px] border-primary " />
 
                     <br />
@@ -139,7 +140,7 @@ const UpdateContests = () => {
                     <br />
 
 
-
+                    <p className="mb-1 text-sm">Task submission info:</p>
                     <input type="text" defaultValue={contests?.submissionDetails} placeholder="Task Submission Info" {...register("submissionDetails", { required: true })} className="px-4 py-2 bg-forth h-12 text-lg text-white w-full rounded-lg border-[0.5px] border-primary " />
 
                     <br />
@@ -150,7 +151,7 @@ const UpdateContests = () => {
 
 
 
-
+                    <p className="mb-1 text-sm">Tag:</p>
                     {/* headless select */}
                     <div className="bg-tertiary mb-5 w-full">
                         <Listbox value={selected} defaultValue={contests?.tag} onChange={setSelected}>
@@ -206,7 +207,7 @@ const UpdateContests = () => {
 
 
 
-                    <p className="my-2">Deadline:</p>
+                    <p className="mb-1 text-sm">Deadline:</p>
                     <input type="date" defaultValue={extractedDate} placeholder="Contest Deadline" {...register("deadline", { required: true })} className="px-4 py-2 bg-forth h-12 text-lg text-white w-full rounded-lg border-[0.5px] border-primary " />
 
                     <br />
