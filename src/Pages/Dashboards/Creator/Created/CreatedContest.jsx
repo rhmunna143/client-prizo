@@ -4,22 +4,34 @@ import CreatedTableRow from "./CreatedTableRow";
 import useAllContext from "../../../../Hooks/useAllContext";
 import { baseURL } from "../../../../Hooks/useAxiosSecure";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import LoaderComponent from "../../../../Components/LoaderComponent";
 
 
 const CreatedContest = () => {
-    const [data, setData] = useState([])
     const { user, setErr } = useAllContext();
 
     const uid = user.uid;
 
-    axios.get(`${baseURL}/contests?uid=${uid}`, { withCredentials: true })
-        .then(res => {
-            setData(res.data)
-        })
-        .catch(err => {
-            console.log(err);
-            setErr(err);
-        })
+
+
+    const { data, isLoading, errors } = useQuery({
+        queryKey: ["data"],
+        queryFn: async () => {
+            const res = await axios.get(`${baseURL}/contest?uid=${uid}`, { withCredentials: true })
+
+            return res.data;
+        }
+    })
+
+    if (isLoading) {
+        return <LoaderComponent />
+    }
+
+    if (errors) {
+        console.log(errors);
+        setErr(errors)
+    }
 
     return (
         <div>
