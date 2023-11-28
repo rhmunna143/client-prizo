@@ -21,6 +21,7 @@ import ManageContest from "../Pages/Dashboards/Admin/ManageContest/ManageContest
 import UpdateContests from "../Pages/Dashboards/Admin/UpdateContests/UpdateContests";
 import AddContest from "../Pages/Dashboards/Creator/Add/AddContest";
 import NotFoundPage from "../Pages/NotFound/NotFound";
+import ProtectedRoute from "../Components/ProtectedRoute";
 
 const router = createBrowserRouter([
     {
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
 
             {
                 path: "/details/:id",
-                element: <DetailsPage></DetailsPage>
+                element: <ProtectedRoute><DetailsPage></DetailsPage></ProtectedRoute>
             },
 
             {
@@ -78,7 +79,7 @@ const router = createBrowserRouter([
 
     {
         path: "dashboard",
-        element: <DashboardRoot />,
+        element: <ProtectedRoute><DashboardRoot /></ProtectedRoute>,
         children: [
 
             // common routes

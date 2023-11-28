@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithPopup, signOut } from "firebase/auth";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import { auth } from "../Config/firebase.config";
 import toast from "react-hot-toast";
@@ -11,6 +11,7 @@ const ContestProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [path, setPath] = useState(null);
+    const [err, serErr] = useState(null);
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -20,16 +21,37 @@ const ContestProvider = ({ children }) => {
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
-
     const socialSignIn = () => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider);
     }
 
+    const loginAccount = (email, password) => {
+
+        return signInWithEmailAndPassword(auth, email, password);
+    }
+
+    const updateProfile = (displayName, photoURL) => {
+
+        updateProfile(auth.currentUser, {
+            displayName: displayName,
+            photoURL: photoURL
+        }).then(() => {
+            console.log("profile updated");
+        }).catch(err => {
+            console.log(err);
+        })
+    }
 
     const logout = () => {
 
-       return signOut(auth)
+        signOut(auth).then(() => {
+            setUser(null);
+            toast.success("Logout success. Login now!!!");
+        }).catch(err => {
+            toast.error(err.message);
+            console.error(err);
+        })
     }
 
     useEffect(() => {
@@ -53,8 +75,9 @@ const ContestProvider = ({ children }) => {
         user,
         path,
         setPath,
-
-
+        serErr,
+        loginAccount,
+        updateProfile,
     }
 
     return (

@@ -3,15 +3,86 @@ import { useForm } from "react-hook-form";
 import Container from "../../Components/Container";
 import "./register.css";
 import Continue from "../../Components/Continue";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import { useState } from "react";
+import useAllContext from "../../Hooks/useAllContext";
+import toast from "react-hot-toast";
+import useAxiosSecure, { baseURL } from "../../Hooks/useAxiosSecure";
+import axios from "axios";
+import { auth } from "../../Config/firebase.config";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const [currentUser, setCurrentUser] = useState(null);
+    const { registerAccount, setErr } = useAllContext();
+
+    const axiosSecure = useAxiosSecure();
 
     const role = "user";
-    
+
+
+    /**
+     * {
+    "name": "Munna",
+    "email": "rhmunna19@gmail.com",
+    "password": "P@ssword",
+    "image": "https://i.ibb.co/4F812XJ/mahdi-aminrad-91-KH4-Fun9lc-unsplash.jpg"
+}
+     * 
+     */
+
+
     const onSubmit = data => {
-        console.log(data);
+
+        registerAccount(data?.email, data?.password)
+            .then(res => {
+
+                updateProfile(auth.currentUser, {
+                    displayName: data.name,
+                    photoURL: data.image
+                })
+
+                const user = res?.user;
+
+                setCurrentUser(user);
+
+                // axiosSecure.post("/users", {
+                //     ...user,
+                //     role,
+                // })
+                //     .then(data => {
+                //         console.log("data from axios",data);
+                //     })
+
+                // const saveUser = {
+                //     displayName: user?.displayName,
+                //     photoURL: user?.photoURL,
+                //     role: role,
+                //     uid: user?.uid,
+                //     email: user?.email,
+                //     password: data?.password
+                // }
+
+                axios.post(`${baseURL}/users`, { ...currentUser, role }, { withCredentials: true })
+                    .then(res => {
+                        if (res?.data?.exist) {
+                            toast.error("Already have an account! Please login.")
+                        }
+                        const savedUser = res.data
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        setErr(err);
+                    })
+
+                toast.success("Account creation success. Login now!");
+            })
+
+            .catch(err => {
+                toast.error(err.message);
+                console.error(err);
+            })
     }
 
     return (
@@ -58,6 +129,10 @@ const Register = () => {
                     </p>
                 </div>
             </Container>
+
+            {
+                currentUser && <Navigate to={"/login"} />
+            }
         </div>
     );
 };

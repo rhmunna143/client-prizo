@@ -4,12 +4,31 @@ import { useForm } from "react-hook-form";
 import Container from "../../Components/Container";
 import "./login.css";
 import Continue from "../../Components/Continue";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import useAllContext from "../../Hooks/useAllContext";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const Login = () => {
+    const { loginAccount, path } = useAllContext();
+    const [currentUser, setCurrenUser] = useState(null)
+
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
     const onSubmit = data => {
-        console.log(data);
+        const { email, password } = data;
+
+        loginAccount(email, password)
+            .then(res => {
+                const user = res?.user;
+                setCurrenUser(user);
+                toast.success(user?.displayName + " Welcome! Now explore contests.")
+
+            })
+            .catch(err => {
+                toast.error(err.message);
+                console.error(err);
+            })
     }
 
     return (
@@ -46,6 +65,10 @@ const Login = () => {
                     </p>
                 </div>
             </Container>
+
+            {
+                currentUser && <Navigate to={path || "/"} />
+            }
         </div>
     );
 };

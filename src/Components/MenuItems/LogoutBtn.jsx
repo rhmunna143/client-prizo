@@ -1,4 +1,4 @@
-import toast from "react-hot-toast";
+
 import useAllContext from "../../Hooks/useAllContext";
 
 
@@ -7,12 +7,7 @@ const LogoutBtn = () => {
 
     const handleLogout = () => {
 
-        logout().then(() => {
-            toast.success("Logout success. Login now!!!");
-        }).catch(err => {
-            toast.error(err.message);
-            console.error(err);
-        })
+        logout()
     }
 
     return (

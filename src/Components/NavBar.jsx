@@ -49,29 +49,29 @@ const Navbar = () => {
 
                         {/* user */}
                         {
-                            !user ? "" 
-                            :
-                            <div className="dropdown dropdown-end">
-                                <div tabIndex={0} role="button" className="bg-primary w-12 h-12 aspect-square rounded-full m-1 flex items-center justify-center">
-                                    <img src={user?.photoURL} alt="dp" />
+                            !user ? ""
+                                :
+                                <div className="dropdown dropdown-end">
+                                    <div tabIndex={0} role="button" className="bg-primary w-12 h-12 aspect-square rounded-full m-1 flex items-center justify-center">
+                                        <img src={user?.photoURL} alt="dp" className='w-12 h-12 aspect-square rounded-full' />
+                                    </div>
+                                    <ul className="dropdown-content z-[1] menu p-2 text-base shadow text-white rounded-lg bg-tertiary w-52">
+                                        <li className='cursor-text'><p className="font-semibold text-base cursor-text">User Name</p></li>
+                                        <li>
+                                            <NavLink
+                                                to="/dashboard"
+                                                className={({ isActive, isPending }) =>
+                                                    isPending ? "pending" : isActive ? "active bg-forth py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg" : "py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg"
+                                                }
+                                            >
+                                                Dashboard
+                                            </NavLink>
+                                        </li>
+                                        <li className='font-medium w-1/2 mb-4 ml-3 mt-4'><LogoutBtn /></li>
+                                    </ul>
                                 </div>
-                                <ul className="dropdown-content z-[1] menu p-2 text-base shadow text-white rounded-lg bg-tertiary w-52">
-                                    <li className='cursor-text'><p className="font-semibold text-base cursor-text">User Name</p></li>
-                                    <li>
-                                        <NavLink
-                                            to="/dashboard"
-                                            className={({ isActive, isPending }) =>
-                                                isPending ? "pending" : isActive ? "active bg-forth py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg" : "py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg"
-                                            }
-                                        >
-                                            Dashboard
-                                        </NavLink>
-                                    </li>
-                                    <li className='font-medium w-1/2 mb-4 ml-3 mt-4'><LogoutBtn /></li>
-                                </ul>
-                            </div>
 
-                         
+
                         }
 
 
@@ -124,7 +124,7 @@ const Navbar = () => {
                     {
                         user && <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="bg-primary w-12 h-12 aspect-square rounded-full m-1 flex items-center justify-center">
-                                <img src={user?.photoURL} alt="dp" />
+                                <img src={user?.photoURL} alt="dp" className='w-12 h-12 aspect-square rounded-full' />
                             </div>
                             <ul className="dropdown-content z-[1] menu p-2 text-base shadow text-white rounded-lg bg-tertiary w-52">
                                 <li className='cursor-text'><p className="font-semibold text-base cursor-text">User Name</p></li>

@@ -4,9 +4,12 @@ import useAllContext from "../Hooks/useAllContext";
 import toast from "react-hot-toast";
 import { Navigate } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
+import { baseURL } from "../Hooks/useAxiosSecure";
 const Continue = () => {
-    const { socialSignIn, path } = useAllContext();
+    const { socialSignIn, path, setErr } = useAllContext();
     const [currentUser, setCurrentUser] = useState("");
+    const role = "user";
 
     const handleSocial = () => {
 
@@ -15,6 +18,25 @@ const Continue = () => {
                 const user = res?.user;
 
                 if (user) {
+
+                    // const saveUser = {
+                    //     displayName: user?.displayName,
+                    //     photoURL: user?.photoURL,
+                    //     role: role,
+                    //     uid: user?.uid,
+                    //     email: user?.email,
+                    //     password: null
+                    // }
+
+                    axios.post(`${baseURL}/users`, { ...user,  role }, { withCredentials: true })
+                        .then(res => {
+                            const savedUser = res.data;
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            setErr(err);
+                        })
+
                     setCurrentUser(user)
                 }
             })
