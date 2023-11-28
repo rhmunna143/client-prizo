@@ -6,14 +6,16 @@ import { baseURL } from "../../../../Hooks/useAxiosSecure";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import LoaderComponent from "../../../../Components/LoaderComponent";
+import { useEffect, useState } from "react";
 
 
 const CreatedContest = () => {
+    const [contests, setContests] = useState([])
     const { user, setErr } = useAllContext();
 
     const uid = user.uid;
 
-    const { data: contests = [], isLoading, errors, refetch } = useQuery({
+    const { data = [], isLoading, errors, refetch } = useQuery({
         queryKey: ["data"],
         queryFn: async () => {
             const res = await axios.get(`${baseURL}/contest?uid=${uid}`, { withCredentials: true })
@@ -22,6 +24,12 @@ const CreatedContest = () => {
         },
         initialData: []
     })
+
+    useEffect(() => {
+        if (data && data.length > 0) {
+            setContests(data)
+        }
+    }, [data])
 
     if (isLoading) {
         return <LoaderComponent />

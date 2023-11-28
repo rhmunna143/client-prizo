@@ -3,7 +3,6 @@ import { useEffect } from "react";
 
 export const baseURL = import.meta.env.VITE_BASE_URL;
 
-
 const instance = axios.create({
     baseURL: "http://localhost:5000",
     withCredentials: true,
