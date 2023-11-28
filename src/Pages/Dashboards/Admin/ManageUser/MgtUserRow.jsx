@@ -1,11 +1,21 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 import { useState } from "react";
-import PropTypes from "prop-types";
+import { MdDelete } from "react-icons/md";
 
-const MgtUserRow = ({ name, email, role }) => {
-    const [userRole, setUserRole] = useState(role);
+const MgtUserRow = ({ user, refetch }) => {
+    const [userRole, setUserRole] = useState(user.role);
+
+    const { displayName, role, uid, photoURL, email } = user;
+
+    console.log(user);
 
     const handleUpdateRole = (selectedRole) => {
         setUserRole(selectedRole);
+
+
+        refetch()
     };
 
     console.log(userRole);
@@ -17,12 +27,12 @@ const MgtUserRow = ({ name, email, role }) => {
                     <div className="avatar">
                         <div className="mask mask-squircle w-12 h-12">
                             {/* update img */}
-                            <img src="" alt="Avatar Tailwind CSS Component" />
+                            <img src={photoURL} alt="Avatar Tailwind CSS Component" />
                         </div>
                     </div>
 
-                    <div>
-                        <div className="font-bold">{name}</div>
+                    <div className="text-white">
+                        <div className="font-bold">{displayName}</div>
                         <div className="text-sm opacity-50">{email}</div>
                     </div>
                 </div>
@@ -31,7 +41,7 @@ const MgtUserRow = ({ name, email, role }) => {
             <td>{userRole}</td>
 
             <th>
-                <select value={userRole}
+                <select defaultValue={role}
                     onChange={(event) => handleUpdateRole(event.target.value)}
                     className="select select-bordered w-fit max-w-xs bg-tertiary text-white"
                 >
@@ -40,14 +50,12 @@ const MgtUserRow = ({ name, email, role }) => {
                     <option value="Admin">Admin</option>
                 </select>
             </th>
+
+            <th>
+                <button className="btn btn-ghost btn-lg text-red-600"><MdDelete /></button>
+            </th>
         </tr>
     );
-};
-
-MgtUserRow.propTypes = {
-    name: PropTypes.string.isRequired,
-    email: PropTypes.string.isRequired,
-    role: PropTypes.string.isRequired,
 };
 
 export default MgtUserRow;

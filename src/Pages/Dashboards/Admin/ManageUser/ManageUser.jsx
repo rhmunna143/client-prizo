@@ -1,12 +1,42 @@
+/* eslint-disable no-unused-vars */
 
+import { useQuery } from "@tanstack/react-query";
 import DashHeading from "../../../../Components/DashHeading";
 import MgtUserRow from "./MgtUserRow";
+import axios from "axios";
+import useAllContext, { baseURL } from "../../../../Hooks/useAllContext";
+import { useEffect, useState } from "react";
+import LoaderComponent from "../../../../Components/LoaderComponent";
 
 
 const ManageUser = () => {
+    const [users, setUsers] = useState([])
+    const { setErr } = useAllContext();
 
+    const { data, isLoading, errors, refetch } = useQuery({
+        queryKey: ["data"],
+        queryFn: async () => {
+            const res = await axios.get(`${baseURL}/users`, { withCredentials: true })
 
-   
+            return res.data;
+        }
+    })
+
+    useEffect(() => {
+        if (data && data.length > 0) {
+            setUsers(data)
+        }
+    }, [data])
+
+    if (errors) {
+        console.log(errors);
+        setErr(errors)
+    }
+
+    if (isLoading) {
+        return <LoaderComponent />
+    }
+
     return (
         <div className="">
             <div className="my-10">
@@ -23,13 +53,16 @@ const ManageUser = () => {
                             <th>Name</th>
                             <th>Role</th>
                             <th>Update Role</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         {/* row 1 */}
 
-                        <MgtUserRow  />
+                        {
+                            users?.map(user => <MgtUserRow key={user._id} user={user} refetch={refetch} />)
+                        }
 
                     </tbody>
                 </table>
