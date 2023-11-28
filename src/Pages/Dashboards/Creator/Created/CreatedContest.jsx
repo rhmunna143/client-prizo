@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import DashHeading from "../../../../Components/DashHeading";
 import CreatedTableRow from "./CreatedTableRow";
 import useAllContext from "../../../../Hooks/useAllContext";
@@ -13,9 +13,7 @@ const CreatedContest = () => {
 
     const uid = user.uid;
 
-
-
-    const { data, isLoading, errors } = useQuery({
+    const { data, isLoading, errors, refetch } = useQuery({
         queryKey: ["data"],
         queryFn: async () => {
             const res = await axios.get(`${baseURL}/contest?uid=${uid}`, { withCredentials: true })
@@ -54,7 +52,7 @@ const CreatedContest = () => {
                         {/* row 1 */}
 
                         {
-                            data?.map(row => <CreatedTableRow key={row._id} data={row} />)
+                            data?.map(row => <CreatedTableRow key={row._id} data={row} refetch={refetch} />)
                         }
 
 

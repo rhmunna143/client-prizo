@@ -11,7 +11,7 @@ const ContestProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const [path, setPath] = useState(null);
-    const [err, serErr] = useState(null);
+    const [err, setErr] = useState(null);
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -75,7 +75,7 @@ const ContestProvider = ({ children }) => {
         user,
         path,
         setPath,
-        serErr,
+        setErr,
         loginAccount,
         updateProfile,
     }

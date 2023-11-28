@@ -64,8 +64,7 @@ const AddContest = () => {
             contestCreator,
             creatorUid,
             status,
-            participants,
-            tag
+            participants
         }, { withCredentials: true })
             .then(res => {
 

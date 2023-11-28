@@ -1,10 +1,52 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
+import { FaRegEdit } from "react-icons/fa";
+import { MdDeleteOutline } from "react-icons/md";
+import { LuView } from "react-icons/lu";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { baseURL } from "../../../../Hooks/useAxiosSecure";
+import useAllContext from "../../../../Hooks/useAllContext";
+import swal from "sweetalert";
+
+const CreatedTableRow = ({ data, refetch }) => {
+    const { contestName, image, status, _id } = data;
+    const { setErr } = useAllContext();
+
+    const handleDelete = () => {
+
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this contest!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
 
 
 
-const CreatedTableRow = ({ data }) => {
-    const { contestName, image, status } = data;
+                    axios.delete(`${baseURL}/contests/delete/${_id}`, { withCredentials: true })
+                        .then(res => {
+                            if (res?.data?._id) {
+                                swal("Poof! Your imaginary file has been deleted!", {
+                                    icon: "success",
+                                });
 
+                                refetch()
+                            }
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            setErr(err)
+                        })
+
+                } else {
+                    swal("Your contest is safe!");
+                }
+            });
+    }
 
     return (
         <tr>
@@ -29,13 +71,13 @@ const CreatedTableRow = ({ data }) => {
 
 
             <th>
-                <button className="btn btn-ghost btn-xs">Edit</button>
+                <Link to={`/dashboard/update/${_id}`}><button disabled={status === "accepted"} className="btn btn-ghost btn-lg"><FaRegEdit /></button></Link>
             </th>
             <th>
-                <button className="btn btn-ghost btn-xs">Delete</button>
+                <button onClick={handleDelete} disabled={status === "accepted"} className="btn btn-ghost btn-lg text-red-600"><MdDeleteOutline /></button>
             </th>
             <th>
-                <button className="btn btn-ghost btn-xs">Submission</button>
+                <Link to={"/dashboard/submitted"}><button className="btn btn-ghost btn-lg"><LuView /></button></Link>
             </th>
         </tr>
     );
