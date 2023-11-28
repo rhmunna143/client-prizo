@@ -18,6 +18,7 @@ const Navbar = () => {
     // Define your menu items in an array
     const menuItems = [
         { id: 1, title: 'Home', link: '/' },
+        { id: 4, title: 'All Contests', link: '/all' },
         { id: 2, title: 'About', link: '/about' },
         { id: 3, title: 'Contact', link: '/contact' },
 
