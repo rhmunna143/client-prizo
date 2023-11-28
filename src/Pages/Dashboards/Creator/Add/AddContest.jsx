@@ -44,6 +44,7 @@ const AddContest = () => {
     const creatorUid = user?.uid;
     const status = "pending";
     const participants = 0;
+    const tag = selected;
 
 
 
@@ -63,8 +64,9 @@ const AddContest = () => {
             contestCreator,
             creatorUid,
             status,
-            participants
-        })
+            participants,
+            tag
+        }, { withCredentials: true })
             .then(res => {
 
                 if (res?.data?._id) {
