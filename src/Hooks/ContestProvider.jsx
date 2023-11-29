@@ -12,6 +12,7 @@ const ContestProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [path, setPath] = useState(null);
     const [err, setErr] = useState(null);
+    const [price, setPrice] = useState(0)
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -78,6 +79,8 @@ const ContestProvider = ({ children }) => {
         setErr,
         loginAccount,
         updateProfile,
+        price,
+        setPrice,
     }
 
     return (

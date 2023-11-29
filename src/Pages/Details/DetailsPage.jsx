@@ -6,15 +6,18 @@ import LoaderComponent from "../../Components/LoaderComponent";
 import useAllContext from "../../Hooks/useAllContext";
 import SectionHeading from "../../Components/SectionHeading";
 import Container from "../../Components/Container";
-import PrimaryBtn from "../../Components/PrimaryBtn";
 import dayjs from "dayjs";
+import useDeadlineCheck from "../../Hooks/useDeadlineCheck";
+import { useEffect } from "react";
 
 export let price = 0;
+let formattedDate;
 
 const DetailsPage = () => {
     const params = useParams();
     const id = params.id;
-    const { setErr } = useAllContext();
+    const { setErr, setPrice } = useAllContext();
+    const isExpired = useDeadlineCheck(formattedDate);
 
     const { data = {}, isLoading, errors } = useQuery({
         queryKey: ["data"],
@@ -24,6 +27,12 @@ const DetailsPage = () => {
             return res.data;
         }
     });
+
+    useEffect(() => {
+        if (price > 0) {
+            setPrice(price)
+        }
+    }, [setPrice])
 
     if (isLoading) {
         return <LoaderComponent />
@@ -36,7 +45,7 @@ const DetailsPage = () => {
 
     price = data?.prizeMoney / 3;
     const deadline = data?.deadline;
-    const formattedDate = dayjs(deadline).format('YYYY-MM-DD');
+    formattedDate = dayjs(deadline).format('YYYY-MM-DD');
     const monthDate = dayjs(deadline).format('MMM DD, YYYY').toUpperCase();
 
     return (
@@ -67,8 +76,14 @@ const DetailsPage = () => {
                         <h6 className="my-4">Deadline: {monthDate}</h6>
 
 
-                        <Link to={"/pay"} className="my-4">
-                            <PrimaryBtn text={"Checkout to registration"} />
+                        <Link to={`/pay/${id}`} className="my-4">
+                            <button disabled={isExpired} className="bg-primary text-secondary font-medium hover:bg-white px-6 py-2 text-lg uppercase rounded-lg">
+                                {!isExpired ?
+                                    "Checkout to registration"
+                                    :
+                                    "Deadline Finished"
+                                }
+                            </button>
                         </Link>
 
 

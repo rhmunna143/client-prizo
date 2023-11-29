@@ -22,6 +22,11 @@ import UpdateContests from "../Pages/Dashboards/Admin/UpdateContests/UpdateConte
 import AddContest from "../Pages/Dashboards/Creator/Add/AddContest";
 import NotFoundPage from "../Pages/NotFound/NotFound";
 import ProtectedRoute from "../Components/ProtectedRoute";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import { baseURL } from "../Hooks/useAllContext";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUB_API_KEY);
 
 const router = createBrowserRouter([
     {
@@ -55,8 +60,9 @@ const router = createBrowserRouter([
             },
 
             {
-                path: "/pay",
-                element: <PaymentsPage></PaymentsPage>
+                path: "/pay/:id",
+                loader: async ({ params }) => await fetch(`${baseURL}/contests/${params?.id}`),
+                element: <Elements stripe={stripePromise}><PaymentsPage></PaymentsPage></Elements>
             }
         ]
     },
