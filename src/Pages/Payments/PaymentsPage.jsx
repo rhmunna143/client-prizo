@@ -4,7 +4,7 @@ import Container from "../../Components/Container";
 import SectionHeading from "../../Components/SectionHeading";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom";
+import { Navigate, useLoaderData, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAllContext, { baseURL } from "../../Hooks/useAllContext";
 
@@ -14,6 +14,7 @@ const PaymentsPage = () => {
     const elements = useElements();
     const { prizeMoney, _id, contestName, image } = useLoaderData();
     const { user } = useAllContext();
+    const navigate = useNavigate();
 
     const uid = user?.uid;
 
@@ -50,24 +51,25 @@ const PaymentsPage = () => {
                 userName: user?.displayName,
                 chargeId: paymentMethod.id,
                 contestName: contestName,
-                image: image
+                image: image,
+                task: "not submitted"
             }
 
             axios.post(`${baseURL}/create-charge?uid=${uid}`, chargeSave, {
-                withCredentials: true,
-                headers: {
-                    Authorization: `Bearer ${import.meta.env.VITE_SK_TEST_API_KEY}`
-                }
+                withCredentials: true
             })
                 .then(res => {
+                    if (res?.data?.savedPayment?._id) {
+                        toast.success("Fess payment success. Now submit your tasks.")
 
-                    console.log("payment response intent: ", res.data);
+                        // navigate to submit page
+
+                        return navigate(`/submit/${_id}`)
+                    }
                 })
                 .catch(error => {
                     console.log(error);
                 })
-
-            console.log("payment success payment method: ", paymentMethod)
         }
     }
 
@@ -78,7 +80,7 @@ const PaymentsPage = () => {
                 <div className="heading w-fit mx-auto">
                     <SectionHeading heading={"Payment"} align={"center"} />
 
-                    <p className="text-2xl text-center mt-10">Registration Fee: $ {price}</p>
+                    <p className="text-2xl text-center mt-10">Registration Fee: $ {price.toFixed(2)}</p>
                 </div>
 
                 <div className="pay text-black w-full lg:w-2/5 lg:p-12 p-4  mx-auto bg-white my-20 rounded-lg shadow-lg ">

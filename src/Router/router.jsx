@@ -25,6 +25,7 @@ import ProtectedRoute from "../Components/ProtectedRoute";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { baseURL } from "../Hooks/useAllContext";
+import SubmitTask from "../Pages/SubmitTask/SubmitTask";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUB_API_KEY);
 
@@ -63,6 +64,11 @@ const router = createBrowserRouter([
                 path: "/pay/:id",
                 loader: async ({ params }) => await fetch(`${baseURL}/contests/${params?.id}`),
                 element: <Elements stripe={stripePromise}><PaymentsPage></PaymentsPage></Elements>
+            },
+
+            {
+                path: "/submit/:id",
+                element: <SubmitTask></SubmitTask>
             }
         ]
     },
