@@ -11,7 +11,7 @@ import useRoleCheck from "../../Hooks/useCreatorCheck";
 
 const DashboardRoot = () => {
     const { user } = useAllContext();
-    const role = useRoleCheck();
+    const userRole = useRoleCheck();
 
     return (
         <div className="bg-secondary py-20">
@@ -37,7 +37,7 @@ const DashboardRoot = () => {
 
                                 <div className="text-center flex flex-col items-center justify-center">
                                     <Link to={"/dashboard/profile"}><h2 className="text-2xl mt-4">{user?.displayName}</h2></Link>
-                                    <h6 className="mt-2 mb-4">{role ? role : "New User"}</h6>
+                                    <h6 className="mt-2 mb-4">{userRole}</h6>
                                     <LogoutBtn />
                                 </div>
                             </div>
@@ -81,30 +81,32 @@ const DashboardRoot = () => {
 
 
                         {/* admin menus */}
-                        <div className="user bg-forth px-2 py-5 rounded-lg text-lg font-medium space-y-3">
+                        {
+                            userRole == "Admin" && <div className="user bg-forth px-2 py-5 rounded-lg text-lg font-medium space-y-3">
 
-                            <div className="bg-tertiary py-2 px-2 rounded-lg">
-                                <NavLink
-                                    to="/dashboard/manage-users"
-                                    className={({ isActive, isPending }) =>
-                                        isPending ? "pending flex items-center gap-2" : isActive ? "active py-1 rounded-lg bg-black px-4 text-white y flex items-center gap-2" : " px-4  py-1 flex items-center gap-2"
-                                    }
-                                >
-                                    <MdManageAccounts />  Manage Users
-                                </NavLink>
-                            </div>
+                                <div className="bg-tertiary py-2 px-2 rounded-lg">
+                                    <NavLink
+                                        to="/dashboard/manage-users"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending flex items-center gap-2" : isActive ? "active py-1 rounded-lg bg-black px-4 text-white y flex items-center gap-2" : " px-4  py-1 flex items-center gap-2"
+                                        }
+                                    >
+                                        <MdManageAccounts />  Manage Users
+                                    </NavLink>
+                                </div>
 
-                            <div className="bg-tertiary py-2 px-2 rounded-lg">
-                                <NavLink
-                                    to="/dashboard/manage-contests"
-                                    className={({ isActive, isPending }) =>
-                                        isPending ? "pending" : isActive ? "active py-1 rounded-lg bg-black px-4 flex items-center gap-2" : " px-4 py-1 flex items-center gap-2"
-                                    }
-                                >
-                                    <MdOutlineManageHistory />  Manage Contests
-                                </NavLink>
+                                <div className="bg-tertiary py-2 px-2 rounded-lg">
+                                    <NavLink
+                                        to="/dashboard/manage-contests"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "active py-1 rounded-lg bg-black px-4 flex items-center gap-2" : " px-4 py-1 flex items-center gap-2"
+                                        }
+                                    >
+                                        <MdOutlineManageHistory />  Manage Contests
+                                    </NavLink>
+                                </div>
                             </div>
-                        </div>
+                        }
 
 
 
@@ -112,42 +114,46 @@ const DashboardRoot = () => {
 
 
                         {/* creator menus */}
-                        <div className="user bg-forth px-2 py-5 rounded-lg text-lg font-medium space-y-3">
 
-                            <div className="bg-tertiary py-2 px-2 rounded-lg">
-                                <NavLink
-                                    to="/dashboard/add"
-                                    className={({ isActive, isPending }) =>
-                                        isPending ? "pending flex items-center gap-2" : isActive ? "active py-1 rounded-lg bg-black px-4 text-white y flex items-center gap-2" : " px-4  py-1 flex items-center gap-2"
-                                    }
-                                >
-                                    <IoIosAddCircle />  Add Contest
-                                </NavLink>
+                        {
+                            userRole == "Creator" || userRole == "Admin" ? <div className="user bg-forth px-2 py-5 rounded-lg text-lg font-medium space-y-3">
+
+                                <div className="bg-tertiary py-2 px-2 rounded-lg">
+                                    <NavLink
+                                        to="/dashboard/add"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending flex items-center gap-2" : isActive ? "active py-1 rounded-lg bg-black px-4 text-white y flex items-center gap-2" : " px-4  py-1 flex items-center gap-2"
+                                        }
+                                    >
+                                        <IoIosAddCircle />  Add Contest
+                                    </NavLink>
+                                </div>
+
+                                <div className="bg-tertiary py-2 px-2 rounded-lg">
+                                    <NavLink
+                                        to="/dashboard/created"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "active py-1 rounded-lg bg-black px-4 flex items-center gap-2" : " px-4 py-1 flex items-center gap-2"
+                                        }
+                                    >
+                                        <MdBookmarkAdded />  Created Contests
+                                    </NavLink>
+                                </div>
+
+                                <div className="bg-tertiary py-2 px-2 rounded-lg">
+                                    <NavLink
+                                        to="/dashboard/submitted"
+                                        className={({ isActive, isPending }) =>
+                                            isPending ? "pending" : isActive ? "active py-1 rounded-lg bg-black px-4 flex items-center gap-2" : " px-4 py-1 flex items-center gap-2"
+                                        }
+                                    >
+                                        <VscFileSubmodule />  Submitted Contests
+                                    </NavLink>
+                                </div>
                             </div>
-
-                            <div className="bg-tertiary py-2 px-2 rounded-lg">
-                                <NavLink
-                                    to="/dashboard/created"
-                                    className={({ isActive, isPending }) =>
-                                        isPending ? "pending" : isActive ? "active py-1 rounded-lg bg-black px-4 flex items-center gap-2" : " px-4 py-1 flex items-center gap-2"
-                                    }
-                                >
-                                    <MdBookmarkAdded />  Created Contests
-                                </NavLink>
-                            </div>
-
-                            <div className="bg-tertiary py-2 px-2 rounded-lg">
-                                <NavLink
-                                    to="/dashboard/submitted"
-                                    className={({ isActive, isPending }) =>
-                                        isPending ? "pending" : isActive ? "active py-1 rounded-lg bg-black px-4 flex items-center gap-2" : " px-4 py-1 flex items-center gap-2"
-                                    }
-                                >
-                                    <VscFileSubmodule />  Submitted Contests
-                                </NavLink>
-                            </div>
-                        </div>
-
+                                :
+                                ""
+                        }
 
 
 

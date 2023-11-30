@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AllContext } from "./ContestProvider";
 
-export const baseURL = import.meta.env.VITE_BASE_URL;
+export const baseURL = import.meta.env.VITE_LIVE_BASE_URL;
 
 const useAllContext = () => {
     const all = useContext(AllContext);

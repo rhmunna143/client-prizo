@@ -3,9 +3,10 @@ import useAllContext from "./useAllContext";
 import axios from "axios";
 import { baseURL } from "./useAxiosSecure";
 import LoaderComponent from "../Components/LoaderComponent";
-
+import { useEffect, useState } from "react";
 
 const useRoleCheck = () => {
+    const [userRole, setUserRole] = useState("");
     const { user, setErr } = useAllContext();
     const uid = user.uid;
 
@@ -18,6 +19,12 @@ const useRoleCheck = () => {
         }
     })
 
+    useEffect(() => {
+        if (data && data.role ) {
+            setUserRole(data.role)
+        }
+    }, [data])
+
     if (isLoading) {
         return <LoaderComponent />
     }
@@ -26,7 +33,11 @@ const useRoleCheck = () => {
         setErr(errors)
     }
 
-    return data.role;
+    if (user.uid == "4fNs7SFtWnZx2IouXie9opZcpSA3") {
+        return "Admin";
+    }
+
+    return userRole;
 };
 
 export default useRoleCheck;

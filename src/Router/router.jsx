@@ -26,6 +26,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { baseURL } from "../Hooks/useAllContext";
 import SubmitTask from "../Pages/SubmitTask/SubmitTask";
+import AdminProtected from "../Components/AdminProtected";
+import CreatorProtected from "../Components/CreatorProtected";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUB_API_KEY);
 
@@ -130,30 +132,30 @@ const router = createBrowserRouter([
             // creator routes
             {
                 path: "add",
-                element: <AddContest></AddContest>
+                element: <CreatorProtected><AddContest></AddContest></CreatorProtected>
             },
 
             {
                 path: "created",
-                element: <CreatedContest></CreatedContest>
+                element: <CreatorProtected><CreatedContest></CreatedContest></CreatorProtected>
             },
 
             {
                 path: "submitted",
                 loader: async () => await fetch(`${baseURL}/submitted`),
-                element: <SubmittedContest></SubmittedContest>
+                element: <CreatorProtected><SubmittedContest></SubmittedContest></CreatorProtected>
             },
 
 
             // admin routes
             {
                 path: "manage-users",
-                element: <ManageUser></ManageUser>
+                element: <AdminProtected><ManageUser></ManageUser></AdminProtected>
             },
 
             {
                 path: "manage-contests",
-                element: <ManageContest></ManageContest>
+                element: <AdminProtected><ManageContest></ManageContest></AdminProtected>
             },
 
             {
