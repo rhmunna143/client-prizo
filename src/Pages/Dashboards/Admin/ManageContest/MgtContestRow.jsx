@@ -59,11 +59,27 @@ const MgtContestRow = ({ contest, refetch }) => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    // swal("The contest is accepted.", {
-                    //     icon: "success",
-                    // });
 
-                    
+
+                    const acceptUpdate = {
+                        status: "accepted"
+                    }
+
+                    axios.patch(`${baseURL}/contest/update/accept?id=${contest?._id}`, acceptUpdate, { withCredentials: true })
+                        .then(res => {
+                            if (res.data._id) {
+                                swal("The contest is accepted.", {
+                                    icon: "success",
+                                });
+
+                                refetch();
+                            }
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            setErr(err)
+                            toast.error(err.message);
+                        })
                 } else {
                     swal("The contest is not accepted.");
                 }
