@@ -5,12 +5,10 @@ import SubmittedContestRow from "./SubmittedContestRow";
 
 
 const SubmittedContest = () => {
-    const { user } = useAllContext();
-    const uid = user?.uid;
-
+    const { user } = useAllContext()
     const submitted = useLoaderData();
 
-    const submittedByUser = submitted?.filter(submitted => submitted?.uid === uid)
+    const submittedByUser = submitted?.filter(submit => submit?.creatorId == user?.uid)
 
     return (
         <div>
@@ -34,7 +32,7 @@ const SubmittedContest = () => {
                             {/* row 1 */}
 
                             {
-                                submittedByUser?.map(contest => <SubmittedContestRow uid={uid} contest={contest} key={contest?._id} />)
+                                submittedByUser?.map(contest => <SubmittedContestRow uid={user?.uid} contest={contest} key={contest?._id} />)
                             }
 
                         </tbody>

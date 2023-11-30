@@ -14,8 +14,9 @@ const SubmitTask = () => {
     const id = params.id;
 
     const onSubmitTask = data => {
+        const task = data.task
         const update = {
-            task: data.task
+            task: task
         }
         axios.patch(`${baseURL}/registered?id=${id}`, update, { withCredentials: true })
             .then(res => {

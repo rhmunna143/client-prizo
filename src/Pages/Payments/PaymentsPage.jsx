@@ -12,7 +12,7 @@ const PaymentsPage = () => {
     const { handleSubmit, formState: { errors } } = useForm();
     const stripe = useStripe();
     const elements = useElements();
-    const { prizeMoney, _id, contestName, image } = useLoaderData();
+    const { prizeMoney, _id, contestName, image, creatorUid, deadline } = useLoaderData();
     const { user } = useAllContext();
     const navigate = useNavigate();
 
@@ -54,6 +54,8 @@ const PaymentsPage = () => {
                 image: image,
                 task: "not submitted",
                 email: user?.email,
+                creatorId: creatorUid,
+                deadline: deadline
             }
 
             axios.post(`${baseURL}/create-charge?uid=${uid}`, chargeSave, {

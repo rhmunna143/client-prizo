@@ -109,6 +109,7 @@ const router = createBrowserRouter([
             // users routes
             {
                 path: "joined",
+                loader: async () => await fetch(`${baseURL}/submitted`),
                 element: <Participated></Participated>
             },
 
