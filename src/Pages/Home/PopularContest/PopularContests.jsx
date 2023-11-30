@@ -16,7 +16,7 @@ const PopularContests = () => {
     const { data: contests = [], errors: err, isLoading } = useQuery({
         queryKey: ["contests"],
         queryFn: async () => {
-            const res = await axios.get(`${baseURL}/contests`, { withCredentials: true })
+            const res = await axios.get(`${baseURL}/contests/top`, { withCredentials: true })
 
             return res.data;
         },

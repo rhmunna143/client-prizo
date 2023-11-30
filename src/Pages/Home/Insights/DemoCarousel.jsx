@@ -2,7 +2,6 @@ import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import "./carousel.css";
 import PrimaryBtn from "../../../Components/PrimaryBtn";
-import demoWinner from "../../../assets/images/community-01.png"
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { baseURL } from "../../../Hooks/useAllContext";

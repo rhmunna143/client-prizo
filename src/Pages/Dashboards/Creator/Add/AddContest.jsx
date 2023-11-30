@@ -31,6 +31,7 @@ const AddContest = () => {
     const status = "pending";
     const participants = 0;
     const tag = selected.name;
+    const creatorPhotoUrl = user?.photoURL
 
 
     const onSubmit = data => {
@@ -41,7 +42,8 @@ const AddContest = () => {
             creatorUid,
             status,
             participants,
-            tag
+            tag,
+            creatorPhotoUrl
         }, { withCredentials: true })
             .then(res => {
 

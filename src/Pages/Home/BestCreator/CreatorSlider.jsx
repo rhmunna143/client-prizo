@@ -1,6 +1,10 @@
+/* eslint-disable react/prop-types */
 import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import "./style.css"
+import { useEffect, useState } from "react"
+import axios from "axios"
+import { baseURL } from "../../../Hooks/useAllContext"
 
 const carousel = (slider) => {
     const z = 300
@@ -18,7 +22,41 @@ const carousel = (slider) => {
     slider.on("detailsChanged", rotate)
 }
 
+const TopCreator = ({ top }) => {
+
+    return (
+        <div className="carousel__cell number-slide1 py-[200px] w-5/6 text-white slide text-2xl slide1-bg space-y-4">
+            <h2 className="">{top?.contestCreator}</h2>
+            <img className="w-20 h-20 aspect-square rounded-full" src={top?.creatorPhotoUrl} alt="creator img" />
+            <h3>{top?.contestName}</h3>
+            <h5 className="text-sm w-40">{top?.description.slice(0, 45)}</h5>
+        </div>
+    )
+}
+
 const CreatorSlider = () => {
+
+    const [contests, setContests] = useState([])
+
+    useEffect(() => {
+        axios.get(`${baseURL}/contests/top`, { withCredentials: true })
+            .then(res => {
+                if (res.data && res.data.length > 0) {
+                    setContests(res.data)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+
+
+    }, [])
+
+    const tops = contests.slice(0, 3)
+
+    console.log(tops);
+
+
     const [sliderRef] = useKeenSlider(
         {
             loop: true,
@@ -33,9 +71,9 @@ const CreatorSlider = () => {
         <div className="wrapper">
             <div className="scene">
                 <div className="carousel keen-slider" ref={sliderRef}>
-                    <div className="carousel__cell number-slide1 py-[200px] w-5/6 text-white slide text-2xl slide1-bg">1</div>
-                    <div className="carousel__cell number-slide2 py-[200px] w-full text-white slide text-2xl slide2-bg">2</div>
-                    <div className="carousel__cell number-slide3 py-[200px] w-full text-white slide text-2xl slide3-bg">3</div>
+                    {
+                        tops.map(top => <TopCreator top={top} key={top._id} />)
+                    }
                 </div>
             </div>
         </div>
