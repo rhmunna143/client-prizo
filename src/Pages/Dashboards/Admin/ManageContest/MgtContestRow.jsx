@@ -49,6 +49,27 @@ const MgtContestRow = ({ contest, refetch }) => {
 
     }
 
+    const handleAccept = id => {
+        swal({
+            title: "Are you sure?",
+            text: "Do you want to Accept this contest?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    // swal("The contest is accepted.", {
+                    //     icon: "success",
+                    // });
+
+                    
+                } else {
+                    swal("The contest is not accepted.");
+                }
+            });
+    }
+
     return (
         <tr>
             <td>
@@ -72,7 +93,11 @@ const MgtContestRow = ({ contest, refetch }) => {
             </th>
 
             <th>
-                <button onClick={() => handleDelete(contest?._id)} className="btn btn-ghost btn-lg text-red-600"><MdDeleteOutline /></button>
+                <button onClick={() => handleAccept(contest?._id)} className="btn btn-primary btn-sm">{contest.status === "pending" ? "Pending" : "Accepted"}</button>
+            </th>
+
+            <th>
+                <button onClick={() => handleDelete(contest?._id)} className="btn btn-ghost  btn-lg text-red-600"><MdDeleteOutline /></button>
             </th>
         </tr>
     );

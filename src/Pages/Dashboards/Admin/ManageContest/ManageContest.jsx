@@ -47,6 +47,7 @@ const ManageContest = () => {
                         <tr className="text-white">
                             <th>Name</th>
                             <th>Update Contest</th>
+                            <th>Status</th>
                             <th>Delete</th>
                         </tr>
                     </thead>
