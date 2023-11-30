@@ -12,7 +12,9 @@ const ContestProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [path, setPath] = useState(null);
     const [err, setErr] = useState(null);
-    const [price, setPrice] = useState(0)
+    const [price, setPrice] = useState(0);
+    const [participated, setParticipated] = useState(0);
+    const [wined, setWined] = useState(0);
 
     const googleProvider = new GoogleAuthProvider();
 
@@ -81,6 +83,10 @@ const ContestProvider = ({ children }) => {
         updateProfile,
         price,
         setPrice,
+        participated,
+        setParticipated,
+        wined,
+        setWined
     }
 
     return (

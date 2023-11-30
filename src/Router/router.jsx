@@ -122,6 +122,7 @@ const router = createBrowserRouter([
 
             {
                 path: "profile",
+                loader: async () => await fetch(`${baseURL}/submitted`),
                 element: <Profile></Profile>
             },
 

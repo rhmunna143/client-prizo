@@ -5,6 +5,7 @@ import DashHeading from "../../../Components/DashHeading";
 import useAllContext from "../../../Hooks/useAllContext";
 import dayjs from "dayjs";
 import useDeadlineCheck from "../../../Hooks/useDeadlineCheck";
+import { useEffect } from "react";
 
 const Row = ({ contest }) => {
     const formattedDate = dayjs(contest?.deadline).format("MMM DD, YYYY").toUpperCase();
@@ -43,7 +44,7 @@ const Row = ({ contest }) => {
 }
 
 const Participated = () => {
-    const { user } = useAllContext();
+    const { user, setParticipated, participants } = useAllContext();
     const data = useLoaderData();
 
     const userFilter = data?.filter(contest => contest?.uid == user?.uid);

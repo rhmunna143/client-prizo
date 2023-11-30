@@ -35,7 +35,6 @@ const TopCreator = ({ top }) => {
 }
 
 const CreatorSlider = () => {
-
     const [contests, setContests] = useState([])
 
     useEffect(() => {
@@ -48,14 +47,9 @@ const CreatorSlider = () => {
             .catch(err => {
                 console.log(err);
             })
-
-
     }, [])
 
     const tops = contests.slice(0, 3)
-
-    console.log(tops);
-
 
     const [sliderRef] = useKeenSlider(
         {
