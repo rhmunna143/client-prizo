@@ -68,6 +68,7 @@ const router = createBrowserRouter([
 
             {
                 path: "/submit/:id",
+                loader: async ({ params }) => await fetch(`${baseURL}/contests/${params?.id}`),
                 element: <SubmitTask></SubmitTask>
             }
         ]
@@ -115,6 +116,7 @@ const router = createBrowserRouter([
 
             {
                 path: "wined",
+                loader: async () => await fetch(`${baseURL}/submitted`),
                 element: <Wined></Wined>
             },
 

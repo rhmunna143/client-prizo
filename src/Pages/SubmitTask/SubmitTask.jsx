@@ -1,17 +1,20 @@
 import { useForm } from "react-hook-form";
 import Container from "../../Components/Container";
 import SectionHeading from "../../Components/SectionHeading";
-import { useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import axios from "axios";
 import useAllContext, { baseURL } from "../../Hooks/useAllContext";
 import toast from "react-hot-toast";
 
 
 const SubmitTask = () => {
+    const contest = useLoaderData()
     const { setErr } = useAllContext();
     const { register, handleSubmit } = useForm()
     const params = useParams()
     const id = params.id;
+
+    console.log(contest);
 
     const onSubmitTask = data => {
         const task = data.task
