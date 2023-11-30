@@ -2,12 +2,16 @@ import Container from "../../Components/Container";
 import "./Banner.css"
 import bannerImg from "../../assets/images/banner-illus.png"
 import { FaSearch } from 'react-icons/fa';
+import axios from "axios";
+import { baseURL } from "../../Hooks/useAllContext";
+import ContestCard from "../AllContests/ContestCard";
 import { useState } from "react";
 
 
 const Banner = () => {
     const [searchText, setSearchTest] = useState("")
-   
+    const [contests, setContests] = useState([])
+
 
     const handleSearchChange = (e) => {
         const text = e.target.value
@@ -17,9 +21,21 @@ const Banner = () => {
 
     const handleSearch = (e) => {
         e.preventDefault()
-        
+
+        fetchContests();
         console.log(searchText);
     }
+
+    const fetchContests = async () => {
+        await axios.get(`${baseURL}/search?tag=${searchText}`)
+            .then(res => {
+                console.log(res.data);
+                setContests(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    };
 
     return (
         <div className="banner-bg py-[200px]">
@@ -34,7 +50,7 @@ const Banner = () => {
                         </p>
 
                         <div className="search pt-5 relative">
-                            <input onChange={handleSearchChange} placeholder="Search Contest here..." type="text" name="search" id="search" className="lg:w-4/5 w-full pl-12 pr-4 py-5 text-lg border border-primary border-solid bg-transparent" />
+                            <input onChange={handleSearchChange} placeholder="Search Contest tag here..." type="text" name="search" id="search" className="lg:w-4/5 w-full pl-12 pr-4 py-5 text-lg border border-primary border-solid bg-transparent" />
 
                             <FaSearch className="text-2xl text-primary absolute top-[45px] left-4" />
 
@@ -46,6 +62,15 @@ const Banner = () => {
                     <div className="img">
                         <img src={bannerImg} alt="" />
                     </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                    {
+                        contests && contests.length > 0 ? contests?.map(item => <ContestCard item={item} key={item?._id} />)
+                            :
+                            ""
+                    }
                 </div>
             </Container>
         </div>

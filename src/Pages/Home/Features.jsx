@@ -16,7 +16,7 @@ const Features = () => {
                             text="Feel free to modify and adapt this text to suit the tone, style, and specifics of your contest hub platform!"
                         />
 
-                        <div className="btn mt-5">
+                        <div className="mt-5">
                             <PrimaryBtn
                                 text="Join Now"
                             />
