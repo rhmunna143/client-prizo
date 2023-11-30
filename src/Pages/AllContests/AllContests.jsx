@@ -13,6 +13,7 @@ const AllContests = () => {
     const [contests, setContests] = useState([])
     const [contestsTagsArray, setContestsTagsArray] = useState([])
     const { setErr } = useAllContext();
+    const filteredContest = contests.filter(contest => contest?.status !== "pending");
 
     const { data = [], errors: err, isLoading } = useQuery({
         queryKey: ["contests"],
@@ -78,7 +79,7 @@ const AllContests = () => {
 
                     <div className="cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         {
-                            contests?.map(item => <ContestCard key={item._id} item={item} />)
+                            filteredContest?.map(item => <ContestCard key={item._id} item={item} />)
                         }
                     </div>
                 </Container>

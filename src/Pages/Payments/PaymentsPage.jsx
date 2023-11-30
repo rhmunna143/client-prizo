@@ -52,7 +52,8 @@ const PaymentsPage = () => {
                 chargeId: paymentMethod.id,
                 contestName: contestName,
                 image: image,
-                task: "not submitted"
+                task: "not submitted",
+                email: user?.email,
             }
 
             axios.post(`${baseURL}/create-charge?uid=${uid}`, chargeSave, {

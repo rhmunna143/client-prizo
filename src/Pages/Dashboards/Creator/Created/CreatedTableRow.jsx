@@ -65,16 +65,16 @@ const CreatedTableRow = ({ data, refetch }) => {
             </td>
 
             {/* status */}
-            <td>
+            <td className="capitalize">
                 {status}
             </td>
 
 
             <th>
-                <Link to={`/dashboard/update/${_id}`}><button disabled={status === "accepted"} className="btn btn-ghost btn-lg"><FaRegEdit /></button></Link>
+                <Link to={`/dashboard/update/${_id}`}><button disabled={status !== "pending"} className={`${status !== "pending" ? "pointer-events-none" : ""} btn btn-ghost btn-lg`}><FaRegEdit /></button></Link>
             </th>
             <th>
-                <button onClick={handleDelete} disabled={status === "accepted"} className="btn btn-ghost btn-lg text-red-600"><MdDeleteOutline /></button>
+                <button onClick={handleDelete} disabled={status !== "pending"} className="btn btn-ghost btn-lg text-red-600"><MdDeleteOutline /></button>
             </th>
             <th>
                 <Link to={"/dashboard/submitted"}><button className="btn btn-ghost btn-lg"><LuView /></button></Link>

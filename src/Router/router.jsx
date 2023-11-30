@@ -136,6 +136,7 @@ const router = createBrowserRouter([
 
             {
                 path: "submitted",
+                loader: async () => await fetch(`${baseURL}/submitted`),
                 element: <SubmittedContest></SubmittedContest>
             },
 
