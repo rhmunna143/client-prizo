@@ -5,12 +5,17 @@ import SectionHeading from "../../Components/SectionHeading";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
+import axios from "axios";
+import useAllContext, { baseURL } from "../../Hooks/useAllContext";
 
 const PaymentsPage = () => {
     const { handleSubmit, formState: { errors } } = useForm();
     const stripe = useStripe();
     const elements = useElements();
-    const { prizeMoney } = useLoaderData();
+    const { prizeMoney, _id, contestName, image } = useLoaderData();
+    const { user } = useAllContext();
+
+    const uid = user?.uid;
 
     const price = prizeMoney / 3;
 
@@ -33,11 +38,36 @@ const PaymentsPage = () => {
             return toast.error(error.message);
         } else {
             // successful payment statements
+            const chargeSave = {
+                amount: price * 100,
+                currency: "usd",
+                source: paymentMethod.id,
+                description: "payment for contest registration",
+                uid: uid,
+                photoURL: user?.photoURL,
+                contestId: _id,
+                winner: "not decided",
+                userName: user?.displayName,
+                chargeId: paymentMethod.id,
+                contestName: contestName,
+                image: image
+            }
 
-            
+            axios.post(`${baseURL}/create-charge?uid=${uid}`, chargeSave, {
+                withCredentials: true,
+                headers: {
+                    Authorization: `Bearer ${import.meta.env.VITE_SK_TEST_API_KEY}`
+                }
+            })
+                .then(res => {
 
+                    console.log("payment response intent: ", res.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                })
 
-            console.log("payment success: ", paymentMethod)
+            console.log("payment success payment method: ", paymentMethod)
         }
     }
 
