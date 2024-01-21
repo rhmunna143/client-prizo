@@ -61,7 +61,7 @@ const Navbar = () => {
                                         <li className='cursor-text'><p className="font-semibold text-base cursor-text">User Name</p></li>
                                         <li>
                                             <NavLink
-                                                to="/dashboard"
+                                                to="/dashboard/home"
                                                 className={({ isActive, isPending }) =>
                                                     isPending ? "pending" : isActive ? "active bg-forth py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg" : "py-2 px-4 hover:text-gray-300 text-white font-medium rounded-lg"
                                                 }
